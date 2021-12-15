@@ -18,11 +18,11 @@ class PairController extends Controller
     }
 
     /**
-     * インデックスページ
+     * アクション
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index()
+    public function __invoke()
     {
         return view('admin.users.pair.index');
     }
