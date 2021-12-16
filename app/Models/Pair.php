@@ -17,4 +17,24 @@ class Pair extends Model
     public const CREATED_AT = 'created_at';
     public const UPDATED_AT = 'updated_at';
     public const DELETED_AT = 'deleted_at';
+
+    /**
+     * リレーション：USER
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * リレーション：Pairing-USER
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function pairingUser()
+    {
+        return $this->belongsTo(User::class, self::USER_ID_PAIRING,User::ID );
+    }
 }
