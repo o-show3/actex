@@ -3,11 +3,36 @@
 namespace App\Services\PairingService;
 
 use App\Services\PairingService\PairingServiceInterface;
-use App\Models\User;
-use App\Models\Pair;
+use App\Repositories\UserRepository;
+use App\Repositories\PairRepository;
 
 class PairingService implements PairingServiceInterface
 {
+    protected $pairRepository;
+    protected $userRepository;
+
+    /**
+     * PairingService constructor.
+     * @param PairRepository $pairRepository
+     * @param UserRepository $userRepository
+     */
+    public function __construct(PairRepository $pairRepository, UserRepository $userRepository)
+    {
+        $this->pairRepository = $pairRepository;
+        $this->userRepository = $userRepository;
+    }
+
+    /**
+     * ペアのリストを取得する
+     *
+     * @param $user_id
+     * @return mixed
+     */
+    public function getPair($user_id)
+    {
+        return
+            $this->pairRepository->getByUserId($user_id);
+    }
 
     /**
      * ペアリングを行う

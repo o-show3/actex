@@ -7,6 +7,14 @@ namespace App\Services\PairingService;
 interface PairingServiceInterface
 {
     /**
+     * ペアのリストを取得する
+     *
+     * @param $user_id
+     * @return mixed
+     */
+    public function getPair($user_id);
+
+    /**
      * ペアリングを行う
      *
      * @param $user_id

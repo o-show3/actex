@@ -3,5 +3,11 @@
 @section('title', 'マッチング一覧')
 {{-- コンテンツ --}}
 @section('content')
-    <p>これは本文の内容</p>
+    <div>
+    <ul>
+    @foreach($pairs as $pair)
+        <li>{{$pair->pairingUser->name}}</li>
+    @endforeach
+    </ul>
+    </div>
 @endsection

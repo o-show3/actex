@@ -24,6 +24,8 @@ class PairController extends Controller
      */
     public function __invoke()
     {
-        return view('admin.users.pair.index');
+        $pairs = $this->pairService->getPair(1);
+
+        return view('admin.users.pair.index', compact('pairs'));
     }
 }
