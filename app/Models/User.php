@@ -52,4 +52,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * リレーション：Administrator
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function administrator()
+    {
+        return $this->hasOne(Administrator::class, Administrator::USER_ID, self::ID)
+            ->withDefault([
+                Administrator::ROLE => Administrator::ROLE_NULL,
+            ]);
+    }
 }
