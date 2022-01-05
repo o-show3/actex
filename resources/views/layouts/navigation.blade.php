@@ -15,6 +15,14 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    {{-- 管理者用 --}}
+                    @if(\Illuminate\Support\Facades\Auth::user()->administrator->role === \App\Models\Administrator::ROLE_FULL)
+                    <x-nav-link :href="route('admin.users.pair')" :active="request()->routeIs('admin.users.pair')">
+                        マッチング管理
+                    </x-nav-link>
+                    @endif
+
                 </div>
             </div>
 
