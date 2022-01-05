@@ -1,6 +1,6 @@
 @extends('admin.common.layout')
 {{-- タイトル --}}
-@section('title', 'マッチング一覧')
+@section('title', '管理画面:マッチング一覧')
 {{-- コンテンツ --}}
 @section('content')
     <div>
