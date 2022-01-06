@@ -6,22 +6,26 @@ use App\Models\Pair;
 use App\Services\PairingService\PairingServiceInterface;
 use App\Repositories\UserRepository;
 use App\Repositories\PairRepository;
+use App\Repositories\CategoryRepository;
 use Illuminate\Support\Collection;
 
 class PairingService implements PairingServiceInterface
 {
     protected $pairRepository;
     protected $userRepository;
+    protected $categoryRepository;
 
     /**
      * PairingService constructor.
      * @param PairRepository $pairRepository
      * @param UserRepository $userRepository
+     * @param CategoryRepository $categoryRepository
      */
-    public function __construct(PairRepository $pairRepository, UserRepository $userRepository)
+    public function __construct(PairRepository $pairRepository, UserRepository $userRepository, CategoryRepository $categoryRepository)
     {
         $this->pairRepository = $pairRepository;
         $this->userRepository = $userRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -61,6 +65,17 @@ class PairingService implements PairingServiceInterface
 
         return
             $candidates;
+    }
+
+    public function getAllCategory()
+    {
+        $categories = new Collection();
+
+        // カテゴリをすベて取得します
+        $categories = $this->categoryRepository->getAllCategory();
+
+        return $categories;
+
     }
 
     /**
