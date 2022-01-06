@@ -24,7 +24,7 @@ Route::get('/dashboard', function () {
 // 管理用
 Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () {
     Route::prefix('users')->name('users.')->group(function () {
-        Route::get('/pair', \App\Http\Controllers\PairController::class)->name('pair');
+        Route::get('/pair', \App\Http\Controllers\Admin\PairController::class)->name('pair');
     });
 });
 
