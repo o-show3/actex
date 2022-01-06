@@ -21,6 +21,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+// ユーザ用
+Route::prefix('users')->name('users.')->group(function () {
+    Route::get('/pair', \App\Http\Controllers\PairController::class)->name('pair');
+});
+
 // 管理用
 Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () {
     Route::prefix('users')->name('users.')->group(function () {

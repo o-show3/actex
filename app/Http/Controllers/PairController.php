@@ -25,7 +25,8 @@ class PairController extends Controller
     public function __invoke()
     {
         $pairs = $this->pairService->getPair(1);
+        $candidates = $this->pairService->getCandidates(1);
 
-        return view('admin.users.pair.index', compact('pairs'));
+        return view('users.pair.index', compact(['pairs','candidates']));
     }
 }
