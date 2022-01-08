@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Category;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class CategoryRepository
 {
@@ -15,6 +16,17 @@ class CategoryRepository
     public function __construct()
     {
         $this->model = Category::class;
+    }
+
+    public function create(string $name, string $description)
+    {
+        $category = new ($this->model);
+        $category::create([
+            Category::UUID => Str::uuid(),
+            Category::NAME => $name,
+            Category::DESCRIPTION => $description,
+        ]);
+        return $category;
     }
 
     /**

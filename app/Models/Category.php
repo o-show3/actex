@@ -9,6 +9,8 @@ class Category extends Model
 {
     use HasFactory;
 
+    protected $fillable = [self::UUID ,self::NAME, self::DESCRIPTION];
+
     // カラム定数の定義
     public const TABLE   = 'categories';
     public const ID = 'id';
