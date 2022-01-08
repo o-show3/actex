@@ -12,6 +12,7 @@ class Category extends Model
     // カラム定数の定義
     public const TABLE   = 'categories';
     public const ID = 'id';
+    public const UUID = 'uuid';
     public const NAME = 'name';
     public const DESCRIPTION = 'description';
     public const CREATED_AT = 'created_at';

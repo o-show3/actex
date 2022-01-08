@@ -15,6 +15,7 @@ class CreateCategoryTable extends Migration
     {
         Schema::create(\App\Models\Category::TABLE, function (Blueprint $table) {
             $table->id();
+            $table->uuid(Category::UUID)->unique();
             $table->string(Category::NAME, Category::MAX_LENGTH[Category::NAME]);
             $table->string(Category::DESCRIPTION, Category::MAX_LENGTH[Category::DESCRIPTION]);
             $table->timestamps();
