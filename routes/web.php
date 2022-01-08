@@ -25,7 +25,11 @@ Route::get('/dashboard', function () {
 Route::prefix('users')->name('users.')->group(function () {
     Route::get('/pair', \App\Http\Controllers\PairController::class)->name('pair');
 });
-Route::get('/category', \App\Http\Controllers\CategoryController::class)->name('category');
+Route::prefix('category')->name('category.')->group(function () {
+    Route::get('/', \App\Http\Controllers\CategoryController::class)->name('top');
+    Route::post('/add', \App\Http\Controllers\CategoryPostController::class)->name('add');
+});
+
 
 
 // 管理用

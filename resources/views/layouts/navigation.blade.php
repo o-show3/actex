@@ -20,7 +20,7 @@
                         マッチング機能
                     </x-nav-link>
                     {{-- 興味 --}}
-                    <x-nav-link :href="route('category')" :active="request()->routeIs('category')">
+                    <x-nav-link :href="route('category.top')" :active="request()->routeIs('category')">
                         興味
                     </x-nav-link>
                     {{-- 管理者用 --}}
