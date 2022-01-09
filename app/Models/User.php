@@ -65,4 +65,21 @@ class User extends Authenticatable
                 Administrator::ROLE => Administrator::ROLE_NULL,
             ]);
     }
+
+    /**
+     * リレーション：Category(経由：CategoryUser)
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasManyThrough
+     */
+    public function category()
+    {
+        return $this->hasManyThrough(
+            Category::class,
+            CategoryUser::class,
+            CategoryUser::USER_ID,
+            Category::ID,
+            self::ID,
+        CategoryUser::CATEGORY_ID
+        );
+    }
 }
