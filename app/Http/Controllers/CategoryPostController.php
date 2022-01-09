@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Services\PairingService\PairingService;
+use App\Services\CategoryService\CategoryService;
 
 class CategoryPostController extends Controller
 {
-    protected $pairService;
+    protected $categoryService;
 
     /*
      * コンストラクタ
      */
-    public function __construct(PairingService $pairService)
+    public function __construct(CategoryService $categoryService)
     {
-        $this->pairService = $pairService;
+        $this->categoryService = $categoryService;
     }
 
     /**
@@ -24,7 +24,6 @@ class CategoryPostController extends Controller
      */
     public function __invoke()
     {
-        $categories = $this->pairService->getAllCategory();
         return view('category.index', compact(['categories']));
     }
 }
