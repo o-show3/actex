@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Crypt;
 
 class User extends Authenticatable
 {
@@ -81,5 +82,15 @@ class User extends Authenticatable
             self::ID,
         CategoryUser::CATEGORY_ID
         );
+    }
+
+    /**
+     * 暗号化したIDの取得
+     *
+     * @return string
+     */
+    public function getEncryptedIdAttribute()
+    {
+        return Crypt::encrypt($this->id);
     }
 }

@@ -83,11 +83,13 @@ class PairingService implements PairingServiceInterface
      *
      * @param $user_id
      * @param $user_id_pairing
+     * @param null $status
      * @return mixed
      */
-    public function pairing($user_id, $user_id_pairing)
+    public function pairing($user_id, $user_id_pairing, $status=null)
     {
-        return __FUNCTION__;
+        return
+            $this->pairRepository->addPairing($user_id, $user_id_pairing, $status);
     }
 
     /**

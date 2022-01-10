@@ -18,4 +18,22 @@ class PairRepository
     {
         $this->model = Pair::class;
     }
+
+    /**
+     * ペアリングを追加する
+     *
+     * @param $user_id
+     * @param $user_id_pairing
+     * @param $status
+     * @return mixed
+     */
+    public function addPairing($user_id, $user_id_pairing, $status)
+    {
+        $pair = new ($this->model);
+        $pair->updateOrCreate(
+            [Pair::USER_ID => $user_id, Pair::USER_ID_PAIRING => $user_id_pairing],
+            [Pair::STATUS => $status]
+        );
+        return $pair;
+    }
 }

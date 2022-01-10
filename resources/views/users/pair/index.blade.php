@@ -11,10 +11,17 @@
     @endforeach
     </ul>
     <p>マッチング候補</p>
-    <ul>
     @foreach($candidates as $candidate)
-        <li>{{$candidate->name}}</li>
-    @endforeach
-    </ul>
+        <form method="post" name="pairing-{{$candidate->encrypted_id}}">
+            <div>
+            @csrf
+            <input type="hidden" name="user" value="{{$candidate->encrypted_id}}" >
+            <p>{{$candidate->name}}</p>
+            <input type="submit" formaction="{{route('users.pair-like')}}" value="Like!">
+            <input type="submit" formaction="{{route('users.pair-none')}}" value="None.">
+        </div>
+        </form>
+        @endforeach
+
     </div>
 @endsection
