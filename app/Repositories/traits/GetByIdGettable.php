@@ -6,7 +6,7 @@ namespace App\Repositories\traits;
  * Trait FindByIdGettable
  * @package App\Repositories\traits
  */
-trait FindByIdGettable
+trait GetByIdGettable
 {
     protected $model = null;
 

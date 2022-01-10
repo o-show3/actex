@@ -8,23 +8,23 @@ use Illuminate\Support\Collection;
  * Trait FindByUserIdGettable
  * @package App\Repositories\traits
  */
-trait FindByUuidGettable
+trait GetByUserIdGettable
 {
     protected $model = null;
 
     /**
-     * UUIDからデータを取得する
+     * ユーザIDからデータを取得する
      *
-     * @param string $uuid
+     * @param int $user_id
      * @return mixed
      */
-    public function getByUuid(string $uuid)
+    public function getByUserId(int $user_id)
     {
         if($this->model == null)
             return new Collection();
 
         return
-            $this->model::where($this->model::UUID, $uuid)
-                 ->first();
+            $this->model::where($this->model::USER_ID, $user_id)
+                 ->get();
     }
 }

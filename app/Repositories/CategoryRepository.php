@@ -3,12 +3,12 @@
 namespace App\Repositories;
 
 use App\Models\Category;
-use App\Repositories\traits\FindByUuidGettable;
+use App\Repositories\traits\GetByUuidGettable;
 use Illuminate\Support\Str;
 
 class CategoryRepository
 {
-    use FindByUuidGettable;
+    use GetByUuidGettable;
 
     protected $model;
 

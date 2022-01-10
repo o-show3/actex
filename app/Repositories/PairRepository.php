@@ -3,11 +3,11 @@
 namespace App\Repositories;
 
 use App\Models\Pair;
-use App\Repositories\traits\FindByUserIdGettable;
+use App\Repositories\traits\GetByUserIdGettable;
 
 class PairRepository
 {
-    use FindByUserIdGettable;
+    use GetByUserIdGettable;
 
     protected $model;
 

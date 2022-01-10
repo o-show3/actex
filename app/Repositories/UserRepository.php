@@ -3,12 +3,12 @@
 namespace App\Repositories;
 
 use App\Models\User;
-use App\Repositories\traits\FindByIdGettable;
+use App\Repositories\traits\GetByIdGettable;
 use Illuminate\Support\Collection;
 
 class UserRepository
 {
-    use FindByIdGettable;
+    use GetByIdGettable;
 
     protected $model;
 
