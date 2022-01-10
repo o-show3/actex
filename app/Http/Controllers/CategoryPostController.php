@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\CategoryService\CategoryService;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryPostController extends Controller
 {
@@ -20,10 +21,15 @@ class CategoryPostController extends Controller
     /**
      * アクション
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function __invoke()
+    public function __invoke(Request $request)
     {
-        return view('category.index', compact(['categories']));
+        // 新規に追加する
+        $this->categoryService->addCategory(Auth::id(), $request->category_key);
+
+        return
+            redirect()->route('category.top');
     }
 }

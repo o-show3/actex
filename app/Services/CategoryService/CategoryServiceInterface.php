@@ -12,4 +12,13 @@ interface CategoryServiceInterface
      * @return mixed
      */
     public function createCategory(string $name, string $description);
+
+    /**
+     * カテゴリを追加する
+     *
+     * @param int $userId
+     * @param string $categoryUuid
+     * @return mixed
+     */
+    public function addCategory(int $userId, string $categoryUuid);
 }
