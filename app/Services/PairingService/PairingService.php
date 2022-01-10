@@ -61,6 +61,11 @@ class PairingService implements PairingServiceInterface
             $matchedIdList[] = $user_id;
             // 除外した候補を取得する
             $candidates = $this->userRepository->getExcludeSpecifiedUser(array_unique($matchedIdList));
+            // 管理者を候補から取り除く
+            $candidates = $candidates->filter(function($value, $key){
+                return !in_array($value->id, [1]); // 管理者に含まれていない候補のみ返す
+            })->all();
+
         }
 
         return
