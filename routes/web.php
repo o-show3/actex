@@ -21,4 +21,23 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+// ユーザ用
+Route::prefix('users')->name('users.')->group(function () {
+    Route::get('/pair', \App\Http\Controllers\PairController::class)->name('pair');
+});
+Route::prefix('category')->name('category.')->group(function () {
+    Route::get('/', \App\Http\Controllers\CategoryController::class)->name('top');
+    Route::post('/add', \App\Http\Controllers\CategoryPostController::class)->name('add');
+});
+
+
+
+// 管理用
+Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () {
+    Route::prefix('users')->name('users.')->group(function () {
+        Route::get('/pair', \App\Http\Controllers\Admin\PairController::class)->name('pair');
+    });
+});
+
+
 require __DIR__.'/auth.php';
