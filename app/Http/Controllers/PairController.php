@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\PairingService\PairingService;
+use Illuminate\Support\Facades\Auth;
 
 class PairController extends Controller
 {
@@ -24,8 +25,8 @@ class PairController extends Controller
      */
     public function __invoke()
     {
-        $pairs = $this->pairService->getPair(1);
-        $candidates = $this->pairService->getCandidates(1);
+        $pairs = $this->pairService->getPair(Auth::id());
+        $candidates = $this->pairService->getCandidates(Auth::id());
 
         return view('users.pair.index', compact(['pairs','candidates']));
     }

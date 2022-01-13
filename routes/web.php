@@ -24,6 +24,8 @@ Route::get('/dashboard', function () {
 // ユーザ用
 Route::prefix('users')->name('users.')->group(function () {
     Route::get('/pair', \App\Http\Controllers\PairController::class)->name('pair');
+    Route::post('/pair/like', [\App\Http\Controllers\PairActionController::class, 'like'])->name('pair-like');
+    Route::post('/pair/none', [\App\Http\Controllers\PairActionController::class, 'none'])->name('pair-none');
 });
 Route::prefix('category')->name('category.')->group(function () {
     Route::get('/', \App\Http\Controllers\CategoryController::class)->name('top');

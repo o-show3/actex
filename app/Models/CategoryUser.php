@@ -47,11 +47,11 @@ class CategoryUser extends Model
     /**
      * リレーション：USER
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class, self::USER_ID, User::ID );
     }
 
 }
