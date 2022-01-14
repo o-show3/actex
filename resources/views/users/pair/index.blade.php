@@ -4,7 +4,7 @@
 {{-- コンテンツ --}}
 @section('content')
     <div>
-    <p>マッチング済み</p>
+    <p>LIKE済み</p>
     <ul>
     @foreach($pairs as $pair)
         @if($pair->status === \App\Models\Pair::STATUS_LIKE)
