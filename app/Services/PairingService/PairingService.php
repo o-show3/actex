@@ -37,6 +37,19 @@ class PairingService implements PairingServiceInterface
     }
 
     /**
+     * LIKEのリストを取得する
+     *
+     * @param $user_id
+     * @return mixed
+     */
+    public function getLikes($user_id)
+    {
+        $allPairUsers = $this->pairRepository->getByUserId($user_id);
+        return
+            $allPairUsers->where(Pair::STATUS, '=', Pair::STATUS_LIKE);
+    }
+
+    /**
      * ペアのリストを取得する
      *
      * @param $user_id
@@ -44,8 +57,19 @@ class PairingService implements PairingServiceInterface
      */
     public function getPair($user_id)
     {
+        // 自分がLikeしたユーザを取得する
+        $allPairUsers = $this->getLikes($user_id);
+        // 自分がLikeされたユーザを取得する
+        $allPairedUsers = $this->pairRepository->getPaired($user_id);
+
+        // 重複したID:相互マッチングしたIDを取得する
+        $pairingUserIds = array_intersect(
+            $allPairUsers->pluck(Pair::USER_ID_PAIRING)->toArray(),
+            $allPairedUsers->pluck(Pair::USER_ID)->toArray()
+        );
+
         return
-            $this->pairRepository->getByUserId($user_id);
+            $this->userRepository->getUsers($pairingUserIds);
     }
 
     /**
