@@ -36,4 +36,17 @@ class PairRepository
         );
         return $pair;
     }
+
+    /**
+     * ペアに追加されているユーザを返す
+     *
+     * @param $user_id
+     * @return mixed
+     */
+    public function getPaired($user_id)
+    {
+        return
+            $this->model::where(Pair::USER_ID_PAIRING, '=', $user_id)
+                ->get();
+    }
 }

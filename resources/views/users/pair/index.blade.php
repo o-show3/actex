@@ -4,11 +4,17 @@
 {{-- コンテンツ --}}
 @section('content')
     <div>
+    <p>マッチング済み</p>
+    <ul>
+        @foreach($pairs as $pair)
+            <li>{{$pair->name}}</li>
+        @endforeach
+    </ul>
     <p>LIKE済み</p>
     <ul>
-    @foreach($pairs as $pair)
-        @if($pair->status === \App\Models\Pair::STATUS_LIKE)
-        <li>{{$pair->pairingUser->name}}</li>
+    @foreach($likes as $like)
+        @if($like->status === \App\Models\Pair::STATUS_LIKE)
+        <li>{{$like->pairingUser->name}}</li>
         @endif
     @endforeach
     </ul>
