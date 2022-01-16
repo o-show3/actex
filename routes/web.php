@@ -33,6 +33,7 @@ Route::prefix('category')->name('category.')->group(function () {
 });
 Route::prefix('message')->name('message.')->group(function () {
     Route::get('/', \App\Http\Controllers\MessageListController::class)->name('top');
+    Route::get('/room/{pairing_user_id}', \App\Http\Controllers\MessageRoomController::class)->name('room');
 });
 
 

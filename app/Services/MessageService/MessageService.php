@@ -35,4 +35,17 @@ class MessageService implements MessageServiceInterface
             $this->pairRepository->getByUserId($userId);
     }
 
+    /**
+     * 個別チャットのメッセージを取得します
+     *
+     * @param int $userId
+     * @param int $pairingUserId
+     * @return mixed
+     */
+    public function getMessageRoom(int $userId, int $pairingUserId)
+    {
+        return
+            $this->messageUserRepository->getMessageRoom($userId, $pairingUserId);
+    }
+
 }

@@ -5,7 +5,7 @@
 @section('content')
     <div>
         @foreach($messageList as $messageItem)
-        <form method="post" name="pairing-{{$messageItem->pairingUser->encrypted_id}}">
+        <form method="get" action="{{route('message.room', ['pairing_user_id' => $messageItem->pairingUser->encrypted_id])}}">
             @csrf
             <input type="hidden" name="user" value="{{$messageItem->pairingUser->encrypted_id}}" >
             <button type="submit">
