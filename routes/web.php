@@ -31,6 +31,9 @@ Route::prefix('category')->name('category.')->group(function () {
     Route::get('/', \App\Http\Controllers\CategoryController::class)->name('top');
     Route::post('/add', \App\Http\Controllers\CategoryPostController::class)->name('add');
 });
+Route::prefix('message')->name('message.')->group(function () {
+    Route::get('/', \App\Http\Controllers\MessageListController::class)->name('top');
+});
 
 
 
