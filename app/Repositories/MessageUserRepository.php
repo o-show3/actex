@@ -75,4 +75,21 @@ class MessageUserRepository
             $roomMessages->sortByDesc('message.created_at')->all();
     }
 
+    /**
+     * メッセージをユーザに紐づける
+     *
+     * @param array $parameters
+     * @return mixed
+     */
+    public function create(array $parameters)
+    {
+        $messageUser = new ($this->model);
+        $messageUser->user_id    = $parameters[MessageUser::USER_ID];
+        $messageUser->to_user_id = $parameters[MessageUser::TO_USER_ID];
+        $messageUser->message_id = $parameters[MessageUser::MESSAGE_ID];
+
+        $messageUser->save();
+
+        return $messageUser;
+    }
 }

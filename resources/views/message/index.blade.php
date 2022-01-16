@@ -15,7 +15,7 @@
                         $latestMessage = \App\Facades\Message::getLastMessage(\Illuminate\Support\Facades\Auth::id(), $messageItem->pairingUser->id);
                     @endphp
                     @if($latestMessage != null)
-                        {{$latestMessage}}
+                        {{\App\Facades\Message::decryptMessage($latestMessage)}}
                     @else
                         <span style="color: #4a5568">まだやりとりを開始していません。</span>
                     @endif

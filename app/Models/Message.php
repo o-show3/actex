@@ -10,6 +10,8 @@ class Message extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [self::TYPE, self::MESSAGE, self::FILE_ID];
+
     // カラム定数の定義
     public const TABLE   = 'messages';
     public const ID      = 'id';
