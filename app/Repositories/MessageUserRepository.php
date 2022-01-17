@@ -48,7 +48,7 @@ class MessageUserRepository
             return null;
 
         return
-            $latestMessage->message->message;
+            $latestMessage->message;
     }
 
     /**

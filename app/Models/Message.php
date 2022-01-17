@@ -26,4 +26,9 @@ class Message extends Model
     public const TYPE_TEXT  = 1;     //メッセージタイプ テキスト
     public const TYPE_IMAGE = 2;     //メッセージタイプ 画像
 
+    public function file()
+    {
+        return $this->belongsTo(File::class);
+    }
+
 }
