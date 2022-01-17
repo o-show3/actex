@@ -32,7 +32,24 @@ class MessageRepository
         $message = new ($this->model);
         $message->message = MessageFacade::encryptMessage($parameters['message']);
         $message->type    = Message::TYPE_TEXT;
-        $message->file_id = null;
+        $message->save();
+
+        return $message;
+    }
+
+    /**
+     * ファイルメッセージを作る
+     *
+     * @param array $parameters
+     * @param int|null $fileId
+     * @return mixed
+     */
+    public function createFile(array $parameters, int $fileId = null)
+    {
+        $message = new ($this->model);
+        $message->message = $parameters['message'];
+        $message->type    = Message::TYPE_IMAGE;
+        $message->file_id = $fileId;
         $message->save();
 
         return $message;

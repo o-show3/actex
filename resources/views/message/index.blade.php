@@ -15,7 +15,11 @@
                         $latestMessage = \App\Facades\Message::getLastMessage(\Illuminate\Support\Facades\Auth::id(), $messageItem->pairingUser->id);
                     @endphp
                     @if($latestMessage != null)
-                        {{\App\Facades\Message::decryptMessage($latestMessage)}}
+                        @if( $latestMessage->file_id != null && $latestMessage->type == \App\Models\Message::TYPE_IMAGE )
+                        画像を送信しました
+                        @elseif( $latestMessage->type == \App\Models\Message::TYPE_TEXT )
+                        {{ \App\Facades\Message::decryptMessage($latestMessage->message)  }}
+                        @endif
                     @else
                         <span style="color: #4a5568">まだやりとりを開始していません。</span>
                     @endif
