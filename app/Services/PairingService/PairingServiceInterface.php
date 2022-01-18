@@ -7,6 +7,14 @@ namespace App\Services\PairingService;
 interface PairingServiceInterface
 {
     /**
+     * LIKEのリストを取得する
+     *
+     * @param $user_id
+     * @return mixed
+     */
+    public function getLikes($user_id);
+
+    /**
      * ペアのリストを取得する
      *
      * @param $user_id
@@ -19,9 +27,10 @@ interface PairingServiceInterface
      *
      * @param $user_id
      * @param $user_id_pairing
+     * @param null $status
      * @return mixed
      */
-    public function pairing($user_id, $user_id_pairing);
+    public function pairing($user_id, $user_id_pairing, $status=null);
 
     /**
      * ペアリングを解除する

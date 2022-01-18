@@ -24,10 +24,18 @@ Route::get('/dashboard', function () {
 // ユーザ用
 Route::prefix('users')->name('users.')->group(function () {
     Route::get('/pair', \App\Http\Controllers\PairController::class)->name('pair');
+    Route::post('/pair/like', [\App\Http\Controllers\PairActionController::class, 'like'])->name('pair-like');
+    Route::post('/pair/none', [\App\Http\Controllers\PairActionController::class, 'none'])->name('pair-none');
 });
 Route::prefix('category')->name('category.')->group(function () {
     Route::get('/', \App\Http\Controllers\CategoryController::class)->name('top');
     Route::post('/add', \App\Http\Controllers\CategoryPostController::class)->name('add');
+});
+Route::prefix('message')->name('message.')->group(function () {
+    Route::get('/', \App\Http\Controllers\MessageListController::class)->name('top');
+    Route::get('/room/{pairing_user_id}', \App\Http\Controllers\MessageRoomController::class)->name('room');
+    Route::post('/room/{pairing_user_id}', \App\Http\Controllers\MessageRoomPostMessageController::class)->name('room-post-message');
+    Route::post('/room/{pairing_user_id}/file', \App\Http\Controllers\MessageRoomPostFileController::class)->name('room-post-file');
 });
 
 

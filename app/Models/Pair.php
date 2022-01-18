@@ -9,14 +9,21 @@ class Pair extends Model
 {
     use HasFactory;
 
+    protected $fillable = [self::USER_ID, self::USER_ID_PAIRING, self::STATUS];
+
     // カラム定数の定義
     public const TABLE   = 'pairs';
     public const USER_ID = 'user_id';
     public const USER_ID_PAIRING = 'user_id_pairing';
+    public const STATUS  = 'status';
     public const INVALID = 'invalid';
     public const CREATED_AT = 'created_at';
     public const UPDATED_AT = 'updated_at';
     public const DELETED_AT = 'deleted_at';
+
+    // 定数
+    public const STATUS_LIKE  = 1;
+    public const STATUS_NONE  = 0;
 
     /**
      * リレーション：USER
