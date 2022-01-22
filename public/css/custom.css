@@ -1,0 +1,10 @@
+/*
+配色　https://colorhunt.co/palette/f0e9d2e6ddc4678983181d31
+*/
+
+.uk-navbar-container:not(.uk-navbar-transparent) {
+    background-color: #F0E9D2 !important;
+}
+.uk-navbar-nav>li.uk-active>a{
+    color: #181D31 !important;
+}
