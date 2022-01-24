@@ -20,8 +20,14 @@
         <script src="{{ asset('js/uikit-icons.min.js') }}" defer></script>
     </head>
     <body>
-        @include('layouts.navigation')
-        <
+    <div data-src="{{ asset('img/background.jpg') }}" uk-height-viewport="expand: true" uk-img uk-grid>
+        <div>
+            <div class="uk-card uk-card-default uk-card-body uk-position-center	 uk-width-1-1">
+                @include('layouts.navigation')
+            </div>
+        </div>
+
         @yield('content')
+    </div>
     </body>
 </html>
