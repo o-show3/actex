@@ -31,6 +31,9 @@ Route::prefix('category')->name('category.')->group(function () {
     Route::get('/', \App\Http\Controllers\CategoryController::class)->name('top');
     Route::post('/add', \App\Http\Controllers\CategoryPostController::class)->name('add');
 });
+Route::prefix('topics')->name('topics.')->group(function () {
+    Route::get('/', \App\Http\Controllers\TopicController::class)->name('top');
+});
 
 
 
