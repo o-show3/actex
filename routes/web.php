@@ -34,6 +34,12 @@ Route::prefix('category')->name('category.')->group(function () {
 Route::prefix('topics')->name('topics.')->group(function () {
     Route::get('/', \App\Http\Controllers\TopicController::class)->name('top');
 });
+Route::prefix('message')->name('message.')->group(function () {
+    Route::get('/', \App\Http\Controllers\MessageListController::class)->name('top');
+    Route::get('/room/{pairing_user_id}', \App\Http\Controllers\MessageRoomController::class)->name('room');
+    Route::post('/room/{pairing_user_id}', \App\Http\Controllers\MessageRoomPostMessageController::class)->name('room-post-message');
+    Route::post('/room/{pairing_user_id}/file', \App\Http\Controllers\MessageRoomPostFileController::class)->name('room-post-file');
+});
 
 
 

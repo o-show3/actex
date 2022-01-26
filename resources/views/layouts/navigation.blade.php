@@ -27,6 +27,10 @@
                     <x-nav-link :href="route('category.top')" :active="request()->routeIs('category')">
                         興味
                     </x-nav-link>
+                    {{-- メッセージ --}}
+                    <x-nav-link :href="route('message.top')" :active="request()->routeIs('message')">
+                        メッセージ
+                    </x-nav-link>
                     {{-- 管理者用 --}}
                     @if(\Illuminate\Support\Facades\Auth::user()->administrator->role === \App\Models\Administrator::ROLE_FULL)
                     <x-nav-link :href="route('admin.users.pair')" :active="request()->routeIs('admin.users.pair')">
