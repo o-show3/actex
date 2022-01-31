@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\ValueObjects\NewsCollection;
-use Illuminate\Http\Request;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Psr7;
+use App\Tasks\CollectiveTopicTask;
+use App\Services\TopicService\TopicService;
 
 class TopicController extends Controller
 {
-    private $guzzle;
 
-    public function __construct()
+    protected $topicService;
+
+    public function __construct(TopicService $topicService)
     {
-        $this->guzzle = new Client();
+        $this->topicService = $topicService;
     }
 
     /**
@@ -25,24 +23,8 @@ class TopicController extends Controller
      */
     public function __invoke()
     {
-        $newsCollection = new NewsCollection();
-        try {
-            $num = 25;
-            $url = config('newsapi.news_api_url') . "top-headlines?country=jp&category=general&pageSize=".$num."&apiKey=" . config('newsapi.news_api_key');
+        $topicCollection = $this->topicService->getNewsList();
 
-            $response =  $this->guzzle->request('get', $url);
-
-            $results = $response->getBody();
-            $articles = json_decode($results, true);
-            $newsCollection = new NewsCollection($articles['articles']);
-
-        } catch (RequestException $e) {
-            echo Psr7\Message::toString($e->getRequest());
-            if ($e->hasResponse()) {
-                echo Psr7\Message::toString($e->getResponse());
-            }
-        }
-
-        return view('topics.index', compact('newsCollection'));
+        return view('topics.index', compact('topicCollection'));
     }
 }

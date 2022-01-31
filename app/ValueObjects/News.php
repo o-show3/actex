@@ -2,6 +2,7 @@
 
 namespace App\ValueObjects;
 
+use App\Models\Topic;
 use Illuminate\Support\Carbon;
 
 class News
@@ -62,5 +63,29 @@ class News
     public function urlToImage()
     {
         return $this->urlToImage;
+    }
+
+
+    /**
+     * トピックに変換します
+     *
+     * @return Topic
+     */
+    public function toTopic()
+    {
+        $topic = new Topic();
+        $topic->fill([
+            Topic::SOURCE => json_encode($this->source),
+            Topic::AUTHOR => $this->author,
+            Topic::TITLE  => $this->title,
+            Topic::DESCRIPTION => $this->description,
+            Topic::URL => $this->url,
+            Topic::URL_TO_IMAGE => $this->urlToImage,
+            Topic::PUBLISHED_AT => $this->publishedAt,
+            Topic::CONTENT => $this->content,
+        ]);
+
+        return
+            $topic;
     }
 }
