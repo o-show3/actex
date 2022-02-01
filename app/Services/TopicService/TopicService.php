@@ -23,7 +23,7 @@ class TopicService
     public function getNewsList()
     {
         /* todo : リポジトリへの分離 */
-        return Topic::orderBy(Topic::PUBLISHED_AT)->get();
+        return Topic::orderByDesc(Topic::PUBLISHED_AT)->get();
     }
 
     /**
