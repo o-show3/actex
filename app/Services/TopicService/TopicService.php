@@ -55,4 +55,16 @@ class TopicService
         return $newsCollection;
     }
 
+    /**
+     * オンラインニュースからトピックを作る
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function createTopicsFromOnlineNews()
+    {
+        // ニュースを取得する
+        $newsCollection = $this->getOnlineNews();
+        // トピックのコレクションに変換して保存する
+        $newsCollection->createTopics();
+    }
 }
