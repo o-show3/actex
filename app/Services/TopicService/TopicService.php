@@ -25,12 +25,14 @@ class TopicService
     }
 
     /**
+     * トピックのリストを取得します
+     *
      * @return Topic[]|\Illuminate\Database\Eloquent\Collection
      */
-    public function getNewsList()
+    public function getTopicList()
     {
-        /* todo : リポジトリへの分離 */
-        return Topic::orderByDesc(Topic::PUBLISHED_AT)->get();
+        return
+            $this->topicRepository->getTopicList();
     }
 
     /**

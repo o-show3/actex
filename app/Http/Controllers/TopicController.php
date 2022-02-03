@@ -23,7 +23,7 @@ class TopicController extends Controller
      */
     public function __invoke()
     {
-        $topicCollection = $this->topicService->getNewsList();
+        $topicCollection = $this->topicService->getTopicList();
 
         return view('topics.index', compact('topicCollection'));
     }

@@ -18,4 +18,15 @@ class TopicRepository
     {
         $this->model = Topic::class;
     }
+
+    /**
+     * トピックの一覧を公開日降順で取得します
+     *
+     * @return mixed
+     */
+    public function getTopicList()
+    {
+        return
+            Topic::orderByDesc(Topic::PUBLISHED_AT)->get();
+    }
 }
