@@ -19,6 +19,10 @@
                     <x-nav-link :href="route('users.pair')" :active="request()->routeIs('users.pair')">
                         マッチング機能
                     </x-nav-link>
+                    {{-- 話題 --}}
+                    <x-nav-link :href="route('topics.top')" :active="request()->routeIs('topics.top')">
+                        話題
+                    </x-nav-link>
                     {{-- 興味 --}}
                     <x-nav-link :href="route('category.top')" :active="request()->routeIs('category')">
                         興味

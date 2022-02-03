@@ -31,6 +31,10 @@ Route::prefix('category')->name('category.')->group(function () {
     Route::get('/', \App\Http\Controllers\CategoryController::class)->name('top');
     Route::post('/add', \App\Http\Controllers\CategoryPostController::class)->name('add');
 });
+Route::prefix('topics')->name('topics.')->group(function () {
+    Route::get('/', \App\Http\Controllers\TopicController::class)->name('top');
+    Route::get('/topic/like/{uuid}', [\App\Http\Controllers\TopicActionController::class, 'like'])->name('topic-like');
+});
 Route::prefix('message')->name('message.')->group(function () {
     Route::get('/', \App\Http\Controllers\MessageListController::class)->name('top');
     Route::get('/room/{pairing_user_id}', \App\Http\Controllers\MessageRoomController::class)->name('room');
