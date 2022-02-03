@@ -32,7 +32,7 @@ class TopicService
      * @return NewsCollection
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getOnlineNews()
+    public function getOnlineNewsFromApi()
     {
         $newsCollection = new NewsCollection();
         try {
@@ -63,7 +63,7 @@ class TopicService
     public function createTopicsFromOnlineNews()
     {
         // ニュースを取得する
-        $newsCollection = $this->getOnlineNews();
+        $newsCollection = $this->getOnlineNewsFromApi();
         // トピックのコレクションに変換して保存する
         $newsCollection->createTopics();
     }
