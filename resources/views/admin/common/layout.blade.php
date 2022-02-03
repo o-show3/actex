@@ -32,6 +32,14 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
+                    <!-- フラッシュメッセージ -->
+                    @if (session('flash'))
+                    <div class="flash">
+                        <div class="flex items-center bg-blue-500 text-white text-sm font-bold px-4 py-3 my-2" role="alert">
+                            <p>{{ session('flash') }}</p>
+                        </div>
+                    </div>
+                    @endif
                     @yield('content')
                 </div>
             </div>

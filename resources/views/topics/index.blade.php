@@ -7,7 +7,13 @@
         @foreach($topicCollection as $topic)
             <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4 border-solid" >
                 <img class="h-40" src="{{$topic->url_to_image}}">
-                <a>{{$topic->title}}</a>
+                <a href="{{$topic->url}}" target="_blank" >{{$topic->title}}</a>
+                <div class="buttons">
+                    {{-- 気になる --}}
+                    <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{route('topics.topic-like', $topic->uuid)}}">
+                        気になる！
+                    </a>
+                </div>
             </div>
         @endforeach
     </div>
