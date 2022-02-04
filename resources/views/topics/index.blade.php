@@ -9,7 +9,7 @@
                 <img class="h-40" src="{{$topic->url_to_image}}">
                 <a href="{{$topic->url}}" target="_blank" >{{$topic->title}}</a>
                 <div class="buttons">
-                    @if(!in_array($topic->id, $userTopicsList))
+                    @if(in_array($topic->id, $userTopicsList))
                     <span>気になる！済み</span>
                     @else
                     {{-- 気になる --}}
