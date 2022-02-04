@@ -36,6 +36,19 @@ class TopicService
     }
 
     /**
+     * ユーザが気になる済みのトピックを取得します
+     *
+     * @param string $userId
+     * @return mixed
+     */
+    public function getUserLikesTopics(string $userId)
+    {
+        return
+            $this->topicUserRepository
+                ->getUserLikesTopics($userId);
+    }
+
+    /**
      * APIからオンライン上のニュースを取得する
      *
      * @return NewsCollection
