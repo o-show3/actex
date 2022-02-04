@@ -13,13 +13,21 @@ class NavbarItem extends Component
     public $href;
 
     /**
+     * アクティブ
+     * @var
+     */
+    public $active=false;
+
+    /**
      * Create a new component instance.
      *
      * @param string $href
+     * @param bool $active
      */
-    public function __construct(string $href)
+    public function __construct(string $href, bool $active=false)
     {
         $this->href   = $href;
+        $this->active = $active;
     }
 
     /**
