@@ -1,17 +1,81 @@
-@extends('admin.common.layout')
-{{-- タイトル --}}
-@section('title', '興味')
-{{-- コンテンツ --}}
-@section('content')
-    <div class="flex flex-wrap">
+<x-layout>
+    @section('title')
+    {{__('Function-Category')}}
+    @endsection
+    @section('subtitle')
+        興味のあるハッシュタグを選択しましょう！
+    @endsection
+    @section('content')
+    <div class="columns">
+        <div class="column">
+            <h1 class="title">登録済みハッシュタグ</h1>
+            <div class="field is-grouped is-grouped-multiline">
+                <div class="control">
+                    <div class="tags has-addons">
+                        <a class="tag is-link">Technology</a>
+                        <a class="tag is-delete"></a>
+                    </div>
+                </div>
+
+                <div class="control">
+                    <div class="tags has-addons">
+                        <a class="tag is-link">CSS</a>
+                        <a class="tag is-delete"></a>
+                    </div>
+                </div>
+
+                <div class="control">
+                    <div class="tags has-addons">
+                        <a class="tag is-link">Flexbox</a>
+                        <a class="tag is-delete"></a>
+                    </div>
+                </div>
+
+                <div class="control">
+                    <div class="tags has-addons">
+                        <a class="tag is-link">Web Design</a>
+                        <a class="tag is-delete"></a>
+                    </div>
+                </div>
+
+                <div class="control">
+                    <div class="tags has-addons">
+                        <a class="tag is-link">Open Source</a>
+                        <a class="tag is-delete"></a>
+                    </div>
+                </div>
+
+                <div class="control">
+                    <div class="tags has-addons">
+                        <a class="tag is-link">Community</a>
+                        <a class="tag is-delete"></a>
+                    </div>
+                </div>
+
+                <div class="control">
+                    <div class="tags has-addons">
+                        <a class="tag is-link">Documentation</a>
+                        <a class="tag is-delete"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column"></div>
+    </div>
+    <h1 class="title">登録するハッシュタグ</h1>
+    <div class="columns">
         @foreach($categories as $category)
-        <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4">
-        <form action="{{route('category.add', ['id' => $category->id])}}" method="post" >
-            @csrf
-            <input type="hidden" name="category_key" value="{{$category->uuid}}">
-            <input type="submit" value="{{$category->description}}" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold w-full py-2 h-16 border border-gray-400 rounded shadow">
-        </form>
+        <div class="column">
+            <form action="{{route('category.add', ['id' => $category->id])}}" method="post" >
+                @csrf
+                <input type="hidden" name="category_key" value="{{$category->uuid}}">
+                <input type="submit" value="{{$category->description}}" class="button is-primary is-light">
+            </form>
         </div>
         @endforeach
     </div>
-@endsection
+    @endsection
+</x-layout>
+
