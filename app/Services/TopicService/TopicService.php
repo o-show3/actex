@@ -17,11 +17,11 @@ class TopicService
     protected $topicRepository;
     protected $topicUserRepository;
 
-    public function __construct(TopicRepository $topicRepository, TopicUserRepository $topicUserRepository)
+    public function __construct()
     {
         $this->guzzle = new Client();
-        $this->topicRepository = $topicRepository;
-        $this->topicUserRepository = $topicUserRepository;
+        $this->topicRepository = new TopicRepository();
+        $this->topicUserRepository = new TopicUserRepository();
     }
 
     /**
