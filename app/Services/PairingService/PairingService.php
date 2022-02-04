@@ -23,17 +23,13 @@ class PairingService implements PairingServiceInterface
 
     /**
      * PairingService constructor.
-     * @param PairRepository $pairRepository
-     * @param UserRepository $userRepository
-     * @param CategoryRepository $categoryRepository
-     * @param CategoryUserRepository $categoryUserRepository
      */
-    public function __construct(PairRepository $pairRepository, UserRepository $userRepository, CategoryRepository $categoryRepository, CategoryUserRepository $categoryUserRepository)
+    public function __construct()
     {
-        $this->pairRepository = $pairRepository;
-        $this->userRepository = $userRepository;
-        $this->categoryRepository = $categoryRepository;
-        $this->categoryUserRepository = $categoryUserRepository;
+        $this->pairRepository = new PairRepository();
+        $this->userRepository = new UserRepository();
+        $this->categoryRepository = new CategoryRepository();
+        $this->categoryUserRepository = new CategoryUserRepository();
     }
 
     /**
