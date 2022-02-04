@@ -29,11 +29,10 @@
             </section>
         </div>
 
-        <div class="column">
+        <div class="column is-full">
             @yield('content')
         </div>
     </div>
-    <div class="column is-1"></div>
 </div>
 </body>
 </html>
