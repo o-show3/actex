@@ -17,11 +17,11 @@ class TopicService
     protected $topicRepository;
     protected $topicUserRepository;
 
-    public function __construct(TopicRepository $topicRepository, TopicUserRepository $topicUserRepository)
+    public function __construct()
     {
         $this->guzzle = new Client();
-        $this->topicRepository = $topicRepository;
-        $this->topicUserRepository = $topicUserRepository;
+        $this->topicRepository = new TopicRepository();
+        $this->topicUserRepository = new TopicUserRepository();
     }
 
     /**
@@ -33,6 +33,19 @@ class TopicService
     {
         return
             $this->topicRepository->getTopicList();
+    }
+
+    /**
+     * ユーザが気になる済みのトピックを取得します
+     *
+     * @param string $userId
+     * @return mixed
+     */
+    public function getUserLikesTopics(string $userId)
+    {
+        return
+            $this->topicUserRepository
+                ->getUserLikesTopics($userId);
     }
 
     /**

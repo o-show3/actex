@@ -20,17 +20,13 @@ class MessageService implements MessageServiceInterface
 
     /**
      * MessageService constructor.
-     * @param PairRepository $pairRepository
-     * @param MessageRepository $messageRepository
-     * @param MessageUserRepository $messageUserRepository
-     * @param FileRepository $fileRepository
      */
-    public function __construct(PairRepository $pairRepository,MessageRepository $messageRepository, MessageUserRepository $messageUserRepository, FileRepository $fileRepository)
+    public function __construct()
     {
-        $this->pairRepository    = $pairRepository;
-        $this->messageRepository = $messageRepository;
-        $this->messageUserRepository = $messageUserRepository;
-        $this->fileRepository = $fileRepository;
+        $this->pairRepository    = new PairRepository();
+        $this->messageRepository = new MessageRepository();
+        $this->messageUserRepository = new MessageUserRepository();
+        $this->fileRepository = new FileRepository();
     }
 
     /**

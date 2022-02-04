@@ -30,4 +30,15 @@ class TopicUserRepository
         return $topicUser;
     }
 
+    /**
+     * ユーザが気になる済みのトピックを取得します
+     *
+     * @param string $userId
+     * @return mixed
+     */
+    public function getUserLikesTopics(string $userId)
+    {
+        return $this->model::where([TopicUser::USER_ID => $userId])
+            ->get();
+    }
 }

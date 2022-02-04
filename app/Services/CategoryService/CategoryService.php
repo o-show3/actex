@@ -14,13 +14,11 @@ class CategoryService implements CategoryServiceInterface
 
     /**
      * CategoryService constructor.
-     * @param CategoryRepository $categoryRepository
-     * @param CategoryUserRepository $categoryUserRepository
      */
-    public function __construct(CategoryRepository $categoryRepository, CategoryUserRepository $categoryUserRepository)
+    public function __construct()
     {
-        $this->categoryRepository = $categoryRepository;
-        $this->categoryUserRepository = $categoryUserRepository;
+        $this->categoryRepository = new CategoryRepository();
+        $this->categoryUserRepository = new CategoryUserRepository;
     }
 
     /**
