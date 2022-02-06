@@ -36,7 +36,10 @@
                                 <p class="card-text">
                                     ジャニーズ事務所公式企業サイト。ごあいさつ、ロゴに込めた想い、会社概要、沿革、グループ会社一覧、お知らせなどジャニーズ事務所の企業情報を掲載しております。
                                 </p>
-                                <a href="#" target="_blank" class="btn btn-primary">開く</a>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button target="_blank" type="button" class="btn btn-primary"><i class="bi bi-door-open"></i>開く</button>
+                                    <button type="button" class="btn btn-primary"><i class="bi bi-bookmark-heart"></i>気になる</button>
+                                </div>
                             </div>
                             <div class="card-footer text-muted">
                                 2022-01-31T11:53:49Z

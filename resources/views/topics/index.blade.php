@@ -3,40 +3,91 @@
         {{__('Function-Topic')}}
     @endsection
     @section('subtitle')
-        気になる話題をみてみましょう！
+        気になるハッシュタグをみてみましょう！
     @endsection
     @section('content')
-        <div class="columns is-desktop">
-            @foreach($topicCollection as $topic)
-            <div class="column is-4">
-                <div class="card">
-                    <header class="card-header">
-                        <p class="card-header-title">
-                            Component
-                        </p>
-                        <button class="card-header-icon" aria-label="more options">
-      <span class="icon">
-        <i class="fas fa-angle-down" aria-hidden="true"></i>
-      </span>
-                        </button>
-                    </header>
-                    <div class="card-content">
-                        <div class="content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
-                            <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
-                            <br>
-                            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+    <div class="mt-4">
+        <h1 class="display-6">最近の気になる話題</h1>
+        <p class="lead">最近のニュースをピックアップ！</p>
+        <div class="container-fluid">
+            <div class="row">
+                @for($i=0;$i<=9;$i++)
+                    <div class="col-4 mb-3">
+                        <div class="card">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">弊社所属タレント越岡裕貴（ふぉ〜ゆ〜）</h5>
+                                <p class="card-text">
+                                    ジャニーズ事務所公式企業サイト。ごあいさつ、ロゴに込めた想い、会社概要、沿革、グループ会社一覧、お知らせなどジャニーズ事務所の企業情報を掲載しております。
+                                </p>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button target="_blank" type="button" class="btn btn-primary"><i class="bi bi-door-open"></i>開く</button>
+                                    <button type="button" class="btn btn-primary"><i class="bi bi-bookmark-heart"></i>気になる</button>
+                                </div>
+                            </div>
+                            <div class="card-footer text-muted">
+                                2022-01-31T11:53:49Z
+                            </div>
                         </div>
                     </div>
-                    <footer class="card-footer">
-                        <a href="#" class="card-footer-item">Save</a>
-                        <a href="#" class="card-footer-item">Edit</a>
-                        <a href="#" class="card-footer-item">Delete</a>
-                    </footer>
-                </div>
+                @endfor
             </div>
-            @endforeach
-        <div>
+        </div>
+    </div>
+    <div class="mt-4">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+{{--        <div class="columns is-desktop">--}}
+{{--            @foreach($topicCollection as $topic)--}}
+{{--            <div class="column is-4">--}}
+{{--                <div class="card">--}}
+{{--                    <header class="card-header">--}}
+{{--                        <p class="card-header-title">--}}
+{{--                            Component--}}
+{{--                        </p>--}}
+{{--                        <button class="card-header-icon" aria-label="more options">--}}
+{{--                            <span class="icon">--}}
+{{--                                <i class="fas fa-angle-down" aria-hidden="true"></i>--}}
+{{--                            </span>--}}
+{{--                        </button>--}}
+{{--                    </header>--}}
+{{--                    <div class="card-content">--}}
+{{--                        <div class="content">--}}
+{{--                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.--}}
+{{--                            <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>--}}
+{{--                            <br>--}}
+{{--                            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <footer class="card-footer">--}}
+{{--                        <a href="#" class="card-footer-item">Save</a>--}}
+{{--                        <a href="#" class="card-footer-item">Edit</a>--}}
+{{--                        <a href="#" class="card-footer-item">Delete</a>--}}
+{{--                    </footer>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            @endforeach--}}
+{{--        <div>--}}
 {{--        </div>--}}
 {{--        <div class="columns">--}}
 {{--            <div class="column is-full">--}}
