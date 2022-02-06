@@ -13,7 +13,10 @@
             <div class="row">
                 <div class="col">
                     @for($i=0;$i<=34;$i++)
-                    <button type="button" class="btn btn-outline-primary">Technology</button>
+                    <button type="button" class="btn btn-outline-primary">
+                        <i class="bi bi-hash"></i>
+                        Hashtag
+                    </button>
                     @endfor
                 </div>
             </div>
