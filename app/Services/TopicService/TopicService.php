@@ -36,6 +36,18 @@ class TopicService
     }
 
     /**
+     * トピックのリストを条件付きで取得します
+     *
+     * @param array $orderByOpitons
+     * @return Topic[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function getTopicListWithOption(array $orderByOpitons)
+    {
+        return
+            $this->topicRepository->getTopicListOrderBy($orderByOpitons);
+    }
+
+    /**
      * ユーザが気になる済みのトピックを取得します
      *
      * @param string $userId

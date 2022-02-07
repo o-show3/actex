@@ -17,9 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', \App\Http\Controllers\DashbordController::class)->middleware(['auth'])->name('dashboard');
 
 // ユーザ用
 Route::prefix('users')->name('users.')->group(function () {
