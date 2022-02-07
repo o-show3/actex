@@ -11,26 +11,31 @@
         <p class="lead">最近のニュースをピックアップ！</p>
         <div class="container-fluid">
             <div class="row">
-                @for($i=0;$i<=9;$i++)
-                    <div class="col-4 mb-3">
-                        <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
+                @foreach($topicCollection as $topic)
+                    <div class="col-3 mb-3">
+                        <div class="card" style="height: 500px ;">
+                            <img src="{{$topic->url_to_image}}" class="card-img-top mx-auto" style="object-fit: contain;width: 75%;height: 100px">
                             <div class="card-body">
-                                <h5 class="card-title">弊社所属タレント越岡裕貴（ふぉ〜ゆ〜）</h5>
+                                <h5 class="card-title">{{$topic->title}}</h5>
                                 <p class="card-text">
-                                    ジャニーズ事務所公式企業サイト。ごあいさつ、ロゴに込めた想い、会社概要、沿革、グループ会社一覧、お知らせなどジャニーズ事務所の企業情報を掲載しております。
-                                </p>
-                                <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button target="_blank" type="button" class="btn btn-primary"><i class="bi bi-door-open"></i>開く</button>
-                                    <button type="button" class="btn btn-primary"><i class="bi bi-bookmark-heart"></i>気になる</button>
-                                </div>
+                                    {{ Str::limit($topic->description, 280, '...') }}
+                               </p>
                             </div>
                             <div class="card-footer text-muted">
-                                2022-01-31T11:53:49Z
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <a href="{{$topic->url}}"  target="_blank" type="button" class="btn btn-primary"><i class="bi bi-door-open"></i>開く</a>
+                                    @if(in_array($topic->id, $userTopicsList))
+                                        <span class="btn btn-outline-primary">気になる！済み</span>
+                                    @else
+                                        <a class="btn btn-primary" href="{{route('topics.topic-like', $topic->uuid)}}">
+                                            気になる！
+                                        </a>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>
-                @endfor
+                @endforeach
             </div>
         </div>
     </div>
