@@ -36,7 +36,12 @@
                                 <div class="chat-message-right pb-4" style="display: flex;flex-shrink: 0;margin-right: auto">
                                     <div>
                                         <img src="{{\Illuminate\Support\Facades\Storage::url('public/user/'.$messageUser->user->id.'/icon.png')}}" class="img-fluid rounded-circle mr-1" alt="..." style="max-width: 35px;display: inline">
-                                        <div class="text-muted small text-nowrap mt-2">You</div>
+                                        <div class="text-muted small text-nowrap mt-2">
+                                            You
+                                        </div>
+                                        @if(!in_array($messageUser->message->id, $kidokuList ))
+                                            <span class="text-muted small">既読</span>
+                                        @endif
                                     </div>
                                     <div class="flex-shrink-1 rounded py-2 px-3 ms-3" style="background-color: aquamarine">
                                         <div class="font-weight-bold mb-1">{{$messageUser->message->created_at}}</div>
@@ -51,7 +56,9 @@
                                 <div class="chat-message-left pb-4" style="display: flex;flex-shrink: 0;flex-direction: row-reverse;margin-left: auto">
                                     <div>
                                         <img src="{{\Illuminate\Support\Facades\Storage::url('public/user/'.$messageUser->user->id.'/icon.png')}}" class="img-fluid rounded-circle mr-1" alt="..." style="max-width: 35px;display: inline">
-                                        <div class="text-muted small text-nowrap mt-2">{{$messageUser->user->name}}</div>
+                                        <div class="text-muted small text-nowrap mt-2">
+                                            {{$messageUser->user->name}}
+                                        </div>
                                     </div>
                                     <div class="flex-shrink-1 rounded py-2 px-3 me-3" style="background-color: gainsboro">
                                         <div class="font-weight-bold mb-1">{{$messageUser->message->created_at}}</div>

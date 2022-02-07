@@ -17,6 +17,7 @@ class Message extends Model
     public const ID      = 'id';
     public const TYPE    = 'type';
     public const MESSAGE   = 'message';
+    public const READ_ICON = 'read_icon';
     public const FILE_ID = 'file_id';
     public const CREATED_AT = 'created_at';
     public const UPDATED_AT = 'updated_at';

@@ -126,4 +126,40 @@ class MessageService implements MessageServiceInterface
         return null;
     }
 
+    /**
+     * 相手の未読メッセージを既読にします
+     *
+     * @param int $userId
+     * @param int $pairing_user_id
+     * @return mixed
+     */
+    public function setReadIcon(int $userId, int $pairing_user_id)
+    {
+        $newMessageIdList = $this->messageUserRepository->getNewMessages($userId, $pairing_user_id);
+        $setList = $newMessageIdList->where(MessageUser::USER_ID , '=', $pairing_user_id)
+            ->pluck('id')
+            ->toArray();
+
+        return
+            $this->messageRepository->addReadIcon($setList, 1);
+    }
+
+    /**
+     * 対話相手の既読メッセージを取得します
+     *
+     * @param int $userId
+     * @param int $pairing_user_id
+     * @return array
+     */
+    public function getKidoku(int $userId, int $pairing_user_id)
+    {
+        $newMessageIdList = $this->messageUserRepository->getNewMessages($userId, $pairing_user_id);
+        $kidokuList = $newMessageIdList->where(MessageUser::USER_ID , '=', $userId)
+            ->pluck('id')
+            ->toArray();
+
+        return
+            $kidokuList;
+    }
+
 }
