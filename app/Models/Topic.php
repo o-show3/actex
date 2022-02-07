@@ -23,6 +23,7 @@ class Topic extends Model
     public const PUBLISHED_AT = 'published_at';
     public const CONTENT = 'content';
     public const IS_PUBLISH = 'is_publish';
+    public const COUNTER = 'counter';
     public const CREATED_AT = 'created_at';
     public const UPDATED_AT = 'updated_at';
     public const DELETED_AT = 'deleted_at';
