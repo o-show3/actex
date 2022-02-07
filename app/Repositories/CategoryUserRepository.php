@@ -45,4 +45,18 @@ class CategoryUserRepository
 
         return false;
     }
+
+
+    /**
+     * ユーザが登録ずみのカテゴリを取得します
+     *
+     * @param int $userId
+     * @return Category[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function getUserCategory(int $userId)
+    {
+        return CategoryUser::where(CategoryUser::USER_ID, $userId)
+            ->with(['category'])
+            ->get();
+    }
 }

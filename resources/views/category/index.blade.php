@@ -12,12 +12,16 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col">
-                    @for($i=0;$i<=34;$i++)
-                        <button type="button" class="btn btn-outline-primary">
-                            <i class="bi bi-hash"></i>
-                            Object
-                        </button>
-                    @endfor
+                    @foreach($newCategories as $newCategory)
+                        <form action="{{route('category.add')}}" method="post" style="display: inline">
+                            @csrf
+                            <input type="hidden" name="category_key" value="{{$newCategory->uuid}}">
+                            <button type="submit" class="btn btn-outline-primary">
+                                <i class="bi bi-hash"></i>
+                                {{$newCategory->description}}
+                            </button>
+                        </form>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -28,13 +32,13 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col">
-                    @for($i=0;$i<=34;$i++)
+                    @foreach($userCategories as $userCategory)
                         <span class="badge rounded-pill bg-danger"><i class="bi bi-x"></i></span>
                         <button class="btn btn-outline-primary" data-bs-toggle="modal"  data-bs-target="#staticBackdrop">
                             <i class="bi bi-hash"></i>
-                            Object
+                            {{$userCategory->category->description}}
                         </button>
-                    @endfor
+                    @endforeach
                 </div>
             </div>
         </div>
