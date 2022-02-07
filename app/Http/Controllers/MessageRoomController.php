@@ -26,11 +26,20 @@ class MessageRoomController extends Controller
      */
     public function __invoke(string $pairing_user_id)
     {
+        $user_id = Auth::id();
         $pairing_user_id = Crypt::decrypt($pairing_user_id);
         $pairing_user = $this->userRepository->getById($pairing_user_id);
-        $messageRoom = $this->messageService->getMessageRoom(Auth::id(), $pairing_user_id);
+
+        // チャットルームのメッセージを取得する
+        $messageRoom = $this->messageService->getMessageRoom($user_id, $pairing_user_id);
+
+        // 相手から既読になっている自分のメッセージのIDを取得する
+        $kidokuList = $this->messageService->getKidoku($user_id,$pairing_user_id);
+
+        // 相手の新しいメッセージを全て既読にする
+        $this->messageService->setReadIcon($user_id,$pairing_user_id);
 
         return
-            view('message.room', compact(['messageRoom', 'pairing_user']));
+            view('message.room', compact(['messageRoom', 'pairing_user', 'kidokuList']));
     }
 }

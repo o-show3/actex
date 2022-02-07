@@ -36,12 +36,13 @@ class CategoryUser extends Model
     }
 
     /**
-     * リレーション：USER
+     * リレーション：Category
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function category(){
-        return $this->hasMany(Category::class);
+    public function category()
+    {
+        return $this->belongsTo(Category::class,  self::CATEGORY_ID, Category::ID);
     }
 
     /**

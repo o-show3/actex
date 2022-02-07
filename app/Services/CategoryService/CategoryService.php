@@ -5,6 +5,7 @@ namespace App\Services\CategoryService;
 use App\Services\CategoryService\CategoryServiceInterface;
 use App\Repositories\CategoryRepository;
 use App\Repositories\CategoryUserRepository;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class CategoryService implements CategoryServiceInterface
@@ -14,13 +15,11 @@ class CategoryService implements CategoryServiceInterface
 
     /**
      * CategoryService constructor.
-     * @param CategoryRepository $categoryRepository
-     * @param CategoryUserRepository $categoryUserRepository
      */
-    public function __construct(CategoryRepository $categoryRepository, CategoryUserRepository $categoryUserRepository)
+    public function __construct()
     {
-        $this->categoryRepository = $categoryRepository;
-        $this->categoryUserRepository = $categoryUserRepository;
+        $this->categoryRepository = new CategoryRepository();
+        $this->categoryUserRepository = new CategoryUserRepository;
     }
 
     /**
@@ -61,6 +60,49 @@ class CategoryService implements CategoryServiceInterface
         });
 
         return $categoryUser;
+    }
+
+    /**
+     * カテゴリをユーザから削除する
+     *
+     * @param int $userId
+     * @param string $categoryUuid
+     * @return mixed
+     */
+    public function deleteCategory(int $userId, string $categoryUuid)
+    {
+        $categoryUser = DB::transaction(function ()use($userId, $categoryUuid) {
+            // カテゴリが存在しているかを確認する
+            $category = $this->categoryRepository->getByUuid($categoryUuid);
+            if(is_null($category))
+                return null;
+
+            // カテゴリの紐付けを削除します
+            return
+                $this->categoryUserRepository->delete($userId, $category->id);
+        });
+
+        return $categoryUser;
+    }
+
+    /**
+     * トレンド（登録者の多い）になっているカテゴリを返します
+     *
+     * @return mixed
+     */
+    public function getTrendCategory()
+    {
+        $trendCategory = $this->categoryUserRepository->getTrendCategory();
+        $trendCategoryId = $trendCategory->pluck('category_id');
+        $trendCategoryData = $this->categoryRepository->getCategoriesById($trendCategoryId);
+
+        $trendCategoryCollection = new Collection();
+        foreach ($trendCategory as $item){
+            $trendCategoryCollection->add($trendCategoryData->find($item->category_id));
+        }
+
+        return
+            $trendCategoryCollection;
     }
 
 }

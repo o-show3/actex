@@ -20,17 +20,13 @@ class MessageService implements MessageServiceInterface
 
     /**
      * MessageService constructor.
-     * @param PairRepository $pairRepository
-     * @param MessageRepository $messageRepository
-     * @param MessageUserRepository $messageUserRepository
-     * @param FileRepository $fileRepository
      */
-    public function __construct(PairRepository $pairRepository,MessageRepository $messageRepository, MessageUserRepository $messageUserRepository, FileRepository $fileRepository)
+    public function __construct()
     {
-        $this->pairRepository    = $pairRepository;
-        $this->messageRepository = $messageRepository;
-        $this->messageUserRepository = $messageUserRepository;
-        $this->fileRepository = $fileRepository;
+        $this->pairRepository    = new PairRepository();
+        $this->messageRepository = new MessageRepository();
+        $this->messageUserRepository = new MessageUserRepository();
+        $this->fileRepository = new FileRepository();
     }
 
     /**
@@ -128,6 +124,42 @@ class MessageService implements MessageServiceInterface
             return $messageUser;
 
         return null;
+    }
+
+    /**
+     * 相手の未読メッセージを既読にします
+     *
+     * @param int $userId
+     * @param int $pairing_user_id
+     * @return mixed
+     */
+    public function setReadIcon(int $userId, int $pairing_user_id)
+    {
+        $newMessageIdList = $this->messageUserRepository->getNewMessages($userId, $pairing_user_id);
+        $setList = $newMessageIdList->where(MessageUser::USER_ID , '=', $pairing_user_id)
+            ->pluck('id')
+            ->toArray();
+
+        return
+            $this->messageRepository->addReadIcon($setList, 1);
+    }
+
+    /**
+     * 対話相手の既読メッセージを取得します
+     *
+     * @param int $userId
+     * @param int $pairing_user_id
+     * @return array
+     */
+    public function getKidoku(int $userId, int $pairing_user_id)
+    {
+        $newMessageIdList = $this->messageUserRepository->getNewMessages($userId, $pairing_user_id);
+        $kidokuList = $newMessageIdList->where(MessageUser::USER_ID , '=', $userId)
+            ->pluck('id')
+            ->toArray();
+
+        return
+            $kidokuList;
     }
 
 }

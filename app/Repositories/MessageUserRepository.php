@@ -6,6 +6,7 @@ use App\Models\Message;
 use App\Models\MessageUser;
 use App\Repositories\traits\GetByIdGettable;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class MessageUserRepository
 {
@@ -72,7 +73,27 @@ class MessageUserRepository
         })->with(Str::singular(Message::TABLE))->get();
 
         return
-            $roomMessages->sortByDesc('message.created_at')->all();
+            $roomMessages->sortBy('message.created_at')->all();
+    }
+
+    /**
+     * 未読メッセージを取得します
+     *
+     * @param int $userId
+     * @param int $pairingUserId
+     * @return \Illuminate\Support\Collection
+     */
+    public function getNewMessages(int $userId, int $pairingUserId)
+    {
+        $messageUser = DB::table(MessageUser::TABLE)
+            ->join(Message::TABLE, (MessageUser::TABLE.".".MessageUser::MESSAGE_ID), (Message::TABLE.".".Message::ID))
+            ->select((Message::TABLE.".".Message::ID), (Message::TABLE.".".Message::READ_ICON), (MessageUser::TABLE.".".MessageUser::USER_ID))
+            ->where(Message::READ_ICON, "=", 0)
+            ->whereIn(MessageUser::USER_ID,[$userId, $pairingUserId])
+            ->get();
+
+        return
+            $messageUser;
     }
 
     /**
