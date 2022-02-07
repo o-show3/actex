@@ -11,6 +11,7 @@ use App\Repositories\CategoryRepository;
 use App\Repositories\CategoryUserRepository;
 use Illuminate\Support\Collection;
 use App\ValueObjects\PartnerCollection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\ValueObjects\Partner;
 
@@ -134,6 +135,17 @@ class PairingService implements PairingServiceInterface
 
         return $categories;
 
+    }
+
+    public function getUserCategory()
+    {
+        $categories = new Collection();
+        $userId = Auth::id();
+
+        // カテゴリをすベて取得します
+        $categories = $this->categoryUserRepository->getUserCategory($userId);
+
+        return $categories;
     }
 
     /**

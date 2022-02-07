@@ -15,7 +15,7 @@ class CreateCategoryCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'create:category';
+    protected $signature = 'create:category {key} {category} ';
 
 
     /**
@@ -44,18 +44,7 @@ class CreateCategoryCommand extends Command
      */
     public function handle()
     {
-        // 入力
-        $name = $this->ask('英語名（キー）を入力してください');
-        $description = $this->ask('カテゴリ名（表示）を入力してください');
-        // 確認
-        $this->info("英語名（キー）: $name");
-        $this->info("カテゴリ名（表示） : $description");
-        if ($this->confirm('この内容で実行してよろしいですか?')) {
-            // 作成処理
-            $this->categoryService->createCategory($name, $description);
-        } else {
-            $this->info('カテゴリの作成をキャンセルしました');
-        }
+        $this->categoryService->createCategory($this->argument('key'), $this->argument('category'));
 
         return Command::SUCCESS;
     }
