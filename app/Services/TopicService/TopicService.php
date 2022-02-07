@@ -36,6 +36,18 @@ class TopicService
     }
 
     /**
+     * トピックのリストを条件付きで取得します
+     *
+     * @param array $orderByOpitons
+     * @return Topic[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function getTopicListWithOption(array $orderByOpitons)
+    {
+        return
+            $this->topicRepository->getTopicListOrderBy($orderByOpitons);
+    }
+
+    /**
      * ユーザが気になる済みのトピックを取得します
      *
      * @param string $userId
@@ -100,6 +112,9 @@ class TopicService
         // トピックを取得する
         $topic = $this->topicRepository->getByUuid($topicUuid);
 
+        // トピックのカウントを増やす
+        $this->addTopicCounter($topic->id,1 );
+
         // トピックを登録する
         $this->addTopicUser($userId, $topic->id, TopicUser::STATUS_LIKE);
     }
@@ -116,5 +131,18 @@ class TopicService
     {
         return
             $this->topicUserRepository->create($userId, $topicId, $status);
+    }
+
+    /**
+     * トピックのカウントを増やします
+     *
+     * @param int $topic_id
+     * @param int $increment
+     * @return mixed
+     */
+    public function addTopicCounter(int $topic_id, int $increment)
+    {
+        return
+            $this->topicRepository->addCounter($topic_id, $increment);
     }
 }
