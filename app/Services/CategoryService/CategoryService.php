@@ -5,6 +5,7 @@ namespace App\Services\CategoryService;
 use App\Services\CategoryService\CategoryServiceInterface;
 use App\Repositories\CategoryRepository;
 use App\Repositories\CategoryUserRepository;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class CategoryService implements CategoryServiceInterface
@@ -82,6 +83,26 @@ class CategoryService implements CategoryServiceInterface
         });
 
         return $categoryUser;
+    }
+
+    /**
+     * トレンド（登録者の多い）になっているカテゴリを返します
+     *
+     * @return mixed
+     */
+    public function getTrendCategory()
+    {
+        $trendCategory = $this->categoryUserRepository->getTrendCategory();
+        $trendCategoryId = $trendCategory->pluck('category_id');
+        $trendCategoryData = $this->categoryRepository->getCategoriesById($trendCategoryId);
+
+        $trendCategoryCollection = new Collection();
+        foreach ($trendCategory as $item){
+            $trendCategoryCollection->add($trendCategoryData->find($item->category_id));
+        }
+
+        return
+            $trendCategoryCollection;
     }
 
 }

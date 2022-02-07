@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\CategoryUser;
+use Illuminate\Support\Facades\DB;
 
 class CategoryUserRepository
 {
@@ -68,4 +69,18 @@ class CategoryUserRepository
             ->with(['category'])
             ->get();
     }
+
+    /**
+     * 登録者数の多いカテゴリを数ごとに集計して返します
+     *
+     * @return mixed
+     */
+    public function getTrendCategory()
+    {
+        return CategoryUser::select(DB::raw('category_id, COUNT(category_id) AS category_id_count'))
+            ->groupBy(CategoryUser::CATEGORY_ID)
+            ->orderBy('category_id_count', 'desc')
+            ->get();
+    }
+
 }
