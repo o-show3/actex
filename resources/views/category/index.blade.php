@@ -33,106 +33,41 @@
             <div class="row">
                 <div class="col">
                     @foreach($userCategories as $userCategory)
-                        <span class="badge rounded-pill bg-danger"><i class="bi bi-x"></i></span>
-                        <button class="btn btn-outline-primary" data-bs-toggle="modal"  data-bs-target="#staticBackdrop">
+                        <button class="btn btn-outline-danger" data-bs-toggle="modal"  data-bs-target="#modal-delete{{$userCategory->category->uuid}}">
                             <i class="bi bi-hash"></i>
                             {{$userCategory->category->description}}
                         </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="modal-delete{{$userCategory->category->uuid}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">確認</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ハッシュタグ「{{$userCategory->category->description}}」の登録を解除します。
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">いいえ</button>
+                                        <form action="{{route('category.delete')}}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="hidden" name="category_key" value="{{$userCategory->category->uuid}}">
+                                            <button type="submit" class="btn btn-danger">
+                                                <i class="bi bi-x"></i>
+                                                はい
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     @endforeach
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Understood</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-            {{--    <div class="columns">--}}
-{{--        <div class="column">--}}
-{{--            <h1 class="title">登録済みハッシュタグ</h1>--}}
-{{--            <div class="field is-grouped is-grouped-multiline">--}}
-{{--                <div class="control">--}}
-{{--                    <div class="tags has-addons">--}}
-{{--                        <a class="tag is-link">Technology</a>--}}
-{{--                        <a class="tag is-delete"></a>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-
-{{--                <div class="control">--}}
-{{--                    <div class="tags has-addons">--}}
-{{--                        <a class="tag is-link">CSS</a>--}}
-{{--                        <a class="tag is-delete"></a>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-
-{{--                <div class="control">--}}
-{{--                    <div class="tags has-addons">--}}
-{{--                        <a class="tag is-link">Flexbox</a>--}}
-{{--                        <a class="tag is-delete"></a>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-
-{{--                <div class="control">--}}
-{{--                    <div class="tags has-addons">--}}
-{{--                        <a class="tag is-link">Web Design</a>--}}
-{{--                        <a class="tag is-delete"></a>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-
-{{--                <div class="control">--}}
-{{--                    <div class="tags has-addons">--}}
-{{--                        <a class="tag is-link">Open Source</a>--}}
-{{--                        <a class="tag is-delete"></a>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-
-{{--                <div class="control">--}}
-{{--                    <div class="tags has-addons">--}}
-{{--                        <a class="tag is-link">Community</a>--}}
-{{--                        <a class="tag is-delete"></a>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-
-{{--                <div class="control">--}}
-{{--                    <div class="tags has-addons">--}}
-{{--                        <a class="tag is-link">Documentation</a>--}}
-{{--                        <a class="tag is-delete"></a>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--    <div class="columns">--}}
-{{--        <div class="column"></div>--}}
-{{--    </div>--}}
-{{--    <h1 class="title">登録するハッシュタグ</h1>--}}
-{{--    <div class="columns">--}}
-{{--        @foreach($categories as $category)--}}
-{{--        <div class="column">--}}
-{{--            <form action="{{route('category.add', ['id' => $category->id])}}" method="post" >--}}
-{{--                @csrf--}}
-{{--                <input type="hidden" name="category_key" value="{{$category->uuid}}">--}}
-{{--                <input type="submit" value="{{$category->description}}" class="button is-primary is-light">--}}
-{{--            </form>--}}
-{{--        </div>--}}
-{{--        @endforeach--}}
-{{--    </div>--}}
     @endsection
 </x-layout>
 

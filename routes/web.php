@@ -28,6 +28,7 @@ Route::prefix('users')->name('users.')->group(function () {
 Route::prefix('category')->name('category.')->group(function () {
     Route::get('/', \App\Http\Controllers\CategoryController::class)->name('top');
     Route::post('/add', \App\Http\Controllers\CategoryPostController::class)->name('add');
+    Route::delete('/delete', \App\Http\Controllers\CategoryDeleteController::class)->name('delete');
 });
 Route::prefix('topics')->name('topics.')->group(function () {
     Route::get('/', \App\Http\Controllers\TopicController::class)->name('top');

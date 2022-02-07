@@ -61,4 +61,27 @@ class CategoryService implements CategoryServiceInterface
         return $categoryUser;
     }
 
+    /**
+     * カテゴリをユーザから削除する
+     *
+     * @param int $userId
+     * @param string $categoryUuid
+     * @return mixed
+     */
+    public function deleteCategory(int $userId, string $categoryUuid)
+    {
+        $categoryUser = DB::transaction(function ()use($userId, $categoryUuid) {
+            // カテゴリが存在しているかを確認する
+            $category = $this->categoryRepository->getByUuid($categoryUuid);
+            if(is_null($category))
+                return null;
+
+            // カテゴリの紐付けを削除します
+            return
+                $this->categoryUserRepository->delete($userId, $category->id);
+        });
+
+        return $categoryUser;
+    }
+
 }

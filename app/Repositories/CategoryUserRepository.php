@@ -28,6 +28,15 @@ class CategoryUserRepository
         return $categoryUser;
     }
 
+    public function delete(int $userId, string $categoryId)
+    {
+        $categoryUser = CategoryUser::where([
+            [CategoryUser::USER_ID, "=", $userId],
+            [CategoryUser::CATEGORY_ID, "=", $categoryId]
+        ])->forceDelete();
+        return $categoryUser;
+    }
+
     /**
      * ユーザIDとカテゴリIDから、既にデータが存在しているかどうかを返します
      *
