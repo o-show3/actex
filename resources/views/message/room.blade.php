@@ -14,7 +14,7 @@
                         <div class="py-2 px-4 border-bottom d-none d-lg-block">
                             <div class="d-flex align-items-center py-1">
                                 <div class="position-relative">
-                                    <img src="{{\Illuminate\Support\Facades\Storage::url('public/user/'.$pairing_user->id.'/icon.png')}}" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                    <img src="{{\Illuminate\Support\Facades\Storage::url('public/user/'.$pairing_user->id.'/icon.png')}}" class="rounded-circle mr-1" width="40" height="40">
                                 </div>
                                 <div class="flex-grow-1 pl-3">
                                     <strong>チャットルーム：{{$pairing_user->name}}</strong>
