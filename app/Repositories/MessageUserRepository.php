@@ -73,7 +73,7 @@ class MessageUserRepository
         })->with(Str::singular(Message::TABLE))->get();
 
         return
-            $roomMessages->sortByDesc('message.created_at')->all();
+            $roomMessages->sortBy('message.created_at')->all();
     }
 
     /**
