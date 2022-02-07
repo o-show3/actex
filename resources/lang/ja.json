@@ -515,6 +515,7 @@
     "Showing": "示すこと",
     "Sierra Leone": "シエラレオネ",
     "Signed in as": "Signed in as",
+    "Sign up": "新規登録",
     "Singapore": "シンガポール",
     "Sint Maarten (Dutch part)": "シント・マールテン",
     "Slovakia": "スロバキア",
@@ -709,5 +710,9 @@
     "Zambia": "ザンビア",
     "Zimbabwe": "ジンバブエ",
     "Zip \/ Postal Code": "郵便番号",
-    "Åland Islands": "Åland Islands"
+    "Åland Islands": "Åland Islands",
+
+    "Function-Category": "ハッシュタグ",
+    "Function-Topic": "気になる話題",
+    "Function-Pair": "マッチ"
 }
