@@ -7,6 +7,7 @@ use App\Repositories\CategoryRepository;
 use App\Repositories\CategoryUserRepository;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use App\Models\CategoryUser;
 
 class CategoryService implements CategoryServiceInterface
 {
@@ -56,7 +57,10 @@ class CategoryService implements CategoryServiceInterface
 
             // カテゴリをユーザに紐づける
             return
-                $this->categoryUserRepository->add($userId, $category->id);
+                $this->categoryUserRepository->create([
+                    CategoryUser::USER_ID =>  $userId,
+                    CategoryUser::CATEGORY_ID => $category->id
+                ]);
         });
 
         return $categoryUser;

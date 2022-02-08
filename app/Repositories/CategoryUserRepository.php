@@ -18,12 +18,12 @@ class CategoryUserRepository
         $this->model = CategoryUser::class;
     }
 
-    public function add(int $userId, string $categoryId)
+    public function create(array $parameters)
     {
         $categoryUser = new ($this->model);
         $categoryUser->create([
-            CategoryUser::USER_ID     => $userId,
-            CategoryUser::CATEGORY_ID => $categoryId,
+            CategoryUser::USER_ID     => $parameters[CategoryUser::USER_ID],
+            CategoryUser::CATEGORY_ID => $parameters[CategoryUser::CATEGORY_ID],
         ]);
 
         return $categoryUser;
