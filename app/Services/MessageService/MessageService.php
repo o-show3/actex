@@ -112,9 +112,8 @@ class MessageService extends Repository implements MessageServiceInterface
              ]);
 
             // メッセージを先に登録する
-            $message = $this->messageRepository->createFile([
-                'message' => MessageFacade::encryptMessage('no-message.') // todo:メーセージ付きのファイル送付機能
-            ], $file->id);
+            // todo:メーセージ付きのファイル送付機能
+            $message = $this->messageRepository->createFile(MessageFacade::encryptMessage('ファイルを送信しました。'), $file->id);
 
             // メッセージと利用者の紐付けを行う
             $messageUser = $this->messageUserRepository->create([

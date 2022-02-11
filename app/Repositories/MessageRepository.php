@@ -24,19 +24,20 @@ class MessageRepository extends Repository
     /**
      * ファイルメッセージを作る
      *
-     * @param array $parameters
+     * @param string $message
      * @param int|null $fileId
      * @return mixed
+     * @throws \Exception
      */
-    public function createFile(array $parameters, int $fileId = null)
+    public function createFile(string $message, int $fileId = null)
     {
-        $message = new ($this->model);
-        $message->message = $parameters['message'];
-        $message->type    = Message::TYPE_IMAGE;
-        $message->file_id = $fileId;
-        $message->save();
+        $entity = parent::create([
+            Message::MESSAGE => $message,
+            Message::TYPE    => Message::TYPE_IMAGE,
+            Message::FILE_ID => $fileId,
+        ]);
 
-        return $message;
+        return $entity;
     }
 
     /**
