@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Repositories\traits\GetByIdGettable;
 use Illuminate\Support\Collection;
 
-class UserRepository
+class UserRepository extends Repository
 {
     use GetByIdGettable;
 
@@ -34,24 +34,24 @@ class UserRepository
             $this->model::whereNotIn($this->model::ID, $excludesIdList)
                 ->get();
     }
-
-    /**
-     * ユーザIDからユーザを取得する
-     *
-     * @param array $userIdList
-     * @return Collection
-     */
-    public function getUsers(array $userIdList)
-    {
-        if($this->model == null)
-            return new Collection();
-
-        $users = $this->model::whereIn(User::ID, $userIdList)
-            ->get();
-
-        if(count($users)==0)
-            return new Collection();
-
-        return $users;
-    }
+//
+//    /**
+//     * ユーザIDからユーザを取得する
+//     *
+//     * @param array $userIdList
+//     * @return Collection
+//     */
+//    public function getUsers(array $userIdList)
+//    {
+//        if($this->model == null)
+//            return new Collection();
+//
+//        $users = $this->model::whereIn(User::ID, $userIdList)
+//            ->get();
+//
+//        if(count($users)==0)
+//            return new Collection();
+//
+//        return $users;
+//    }
 }
