@@ -72,7 +72,7 @@
                                             @if($messageUser->message->file != null)
                                             <img style="max-height: 300px; max-width: 600px;" src="{{\Illuminate\Support\Facades\Storage::url($messageUser->message->file->path)}}">
                                             @else
-                                            <span>ファイルが参照できませんでした。</span>
+                                            <span style="color: red">エラー：送信されたファイルが参照できませんでした。</span>
                                             @endif
                                         @endif
                                     </div>
