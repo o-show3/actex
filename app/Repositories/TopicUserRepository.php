@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Models\TopicUser;
 use App\Repositories\traits\GetByUuidGettable;
 
-class TopicUserRepository
+class TopicUserRepository extends Repository
 {
     use GetByUuidGettable;
 
@@ -24,10 +24,12 @@ class TopicUserRepository
      *
      * @param string $userId
      * @return mixed
+     * @throws \Exception
      */
     public function getUserLikesTopics(string $userId)
     {
-        return $this->model::where([TopicUser::USER_ID => $userId])
-            ->get();
+        return $this->where([
+            [parent::WHERE_KEY => TopicUser::USER_ID, parent::WHERE_SEPARATOR => '=', parent::WHERE_VALUE => $userId]
+        ]);
     }
 }
