@@ -67,4 +67,21 @@ class Repository
             $this->model::where($parameters)->count();
 
     }
+
+    /**
+     * 条件を満たすデータを取得します
+     *
+     * @param $key
+     * @param array $primaryKeys
+     * @throws \Exception
+     */
+    public function whereInKeys($key, array $primaryKeys)
+    {
+        if($this->model == null)
+            throw new \Exception('データ取得エラー');
+
+        // エンティティを取得する
+        return
+            $this->model::whereIn($key, $primaryKeys)->get();
+    }
 }

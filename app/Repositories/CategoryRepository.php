@@ -29,17 +29,4 @@ class CategoryRepository extends Repository
     {
         return Category::all();
     }
-
-
-    /**
-     * カテゴリーをIDから取得します
-     *
-     * @param $categoryIdList
-     * @return mixed
-     */
-    public function getCategoriesById($categoryIdList)
-    {
-        return
-            Category::whereIn(Category::ID, $categoryIdList)->get();
-    }
 }

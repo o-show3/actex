@@ -110,8 +110,8 @@ class CategoryService implements CategoryServiceInterface
     public function getTrendCategory()
     {
         $trendCategory = $this->categoryUserRepository->getTrendCategory();
-        $trendCategoryId = $trendCategory->pluck('category_id');
-        $trendCategoryData = $this->categoryRepository->getCategoriesById($trendCategoryId);
+        $trendCategoryId = $trendCategory->pluck(CategoryUser::CATEGORY_ID);
+        $trendCategoryData = $this->categoryRepository->whereInKeys(Category::ID, $trendCategoryId->toArray());
 
         $trendCategoryCollection = new Collection();
         foreach ($trendCategory as $item){
