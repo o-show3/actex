@@ -39,7 +39,7 @@ class CategoryUserRepository extends Repository
     public function getTrendCategory()
     {
         return CategoryUser::select(DB::raw('category_id, COUNT(category_id) AS category_id_count'))
-            ->groupBy(CategoryUser::CATEGORY_ID)
+            ->groupBy('category_id')
             ->orderBy('category_id_count', 'desc')
             ->get();
     }
