@@ -37,7 +37,7 @@ class MessageRoomController extends Controller
         $kidokuList = $this->messageService->getKidoku($user_id,$pairing_user_id);
 
         // 相手の新しいメッセージを全て既読にする
-        $this->messageService->setReadIcon($user_id,$pairing_user_id);
+        $this->messageService->setKidoku($user_id,$pairing_user_id);
 
         return
             view('message.room', compact(['messageRoom', 'pairing_user', 'kidokuList']));

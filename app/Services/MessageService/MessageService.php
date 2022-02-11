@@ -138,15 +138,20 @@ class MessageService extends Repository implements MessageServiceInterface
      * @param int $pairing_user_id
      * @return mixed
      */
-    public function setReadIcon(int $userId, int $pairing_user_id)
+    public function setKidoku(int $userId, int $pairing_user_id)
     {
         $newMessageIdList = $this->messageUserRepository->getNewMessages($userId, $pairing_user_id);
         $setList = $newMessageIdList->where(MessageUser::USER_ID , '=', $pairing_user_id)
             ->pluck('id')
             ->toArray();
 
+        // 既読にする
+        $message = Message::whereIn(Message::ID, $setList)
+                ->where(Message::READ_ICON, "=", 0)
+                ->increment(Message::READ_ICON, 1);
+
         return
-            $this->messageRepository->addReadIcon($setList, 1);
+            $message;
     }
 
     /**

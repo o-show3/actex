@@ -39,19 +39,4 @@ class MessageRepository extends Repository
 
         return $entity;
     }
-
-    /**
-     * 既読カウンターに値を加算して更新します
-     *
-     * @param array $messageList
-     * @param int $increment
-     * @return mixed
-     */
-    public function addReadIcon(array $messageList, int $increment)
-    {
-        return
-            Message::whereIn(Message::ID, $messageList)
-                ->where(Message::READ_ICON, "=", 0)
-                ->increment(Message::READ_ICON, $increment);
-    }
 }
