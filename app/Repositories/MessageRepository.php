@@ -7,7 +7,7 @@ use App\Facades\Message as MessageFacade;
 use App\Repositories\traits\GetByIdGettable;
 use Illuminate\Support\Facades\Crypt;
 
-class MessageRepository
+class MessageRepository extends Repository
 {
     use GetByIdGettable;
 
@@ -19,22 +19,6 @@ class MessageRepository
     public function __construct()
     {
         $this->model = Message::class;
-    }
-
-    /**
-     * メッセージを作る
-     *
-     * @param array $parameters
-     * @return mixed
-     */
-    public function create(array $parameters)
-    {
-        $message = new ($this->model);
-        $message->message = MessageFacade::encryptMessage($parameters['message']);
-        $message->type    = Message::TYPE_TEXT;
-        $message->save();
-
-        return $message;
     }
 
     /**

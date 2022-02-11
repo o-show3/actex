@@ -2,12 +2,14 @@
 
 namespace App\Services\CategoryService;
 
+use App\Models\Category;
 use App\Services\CategoryService\CategoryServiceInterface;
 use App\Repositories\CategoryRepository;
 use App\Repositories\CategoryUserRepository;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use App\Models\CategoryUser;
+use Illuminate\Support\Str;
 
 class CategoryService implements CategoryServiceInterface
 {
@@ -33,7 +35,11 @@ class CategoryService implements CategoryServiceInterface
     public function createCategory(string $name, string $description)
     {
         return
-            $this->categoryRepository->create($name, $description);
+            $this->categoryRepository->create([
+                Category::UUID => Str::uuid(),
+                Category::NAME => $name,
+                Category::DESCRIPTION => $description,
+            ]);
     }
 
     /**
@@ -55,11 +61,11 @@ class CategoryService implements CategoryServiceInterface
             if($isExist === true)
                 return null;// 存在している場合
 
-            // カテゴリをユーザに紐づける
+            // カテゴリをユーザに紐付ける
             return
                 $this->categoryUserRepository->create([
-                    CategoryUser::USER_ID =>  $userId,
-                    CategoryUser::CATEGORY_ID => $category->id
+                    CategoryUser::USER_ID     => $userId,
+                    CategoryUser::CATEGORY_ID => $category->id,
                 ]);
         });
 

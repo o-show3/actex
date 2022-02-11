@@ -19,17 +19,6 @@ class TopicUserRepository
         $this->model = TopicUser::class;
     }
 
-    public function create(string $userId, string $topicId, int $status)
-    {
-        $topicUser = new ($this->model);
-        $topicUser::create([
-            TopicUser::USER_ID => $userId,
-            TopicUser::TOPIC_ID => $topicId,
-            TopicUser::STATUS => $status,
-        ]);
-        return $topicUser;
-    }
-
     /**
      * ユーザが気になる済みのトピックを取得します
      *

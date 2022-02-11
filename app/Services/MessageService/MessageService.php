@@ -2,16 +2,18 @@
 
 namespace App\Services\MessageService;
 
-use App\Facades\Message;
+use App\Facades\Message as MessageFacade;
 use App\Models\File;
+use App\Models\Message;
 use App\Models\MessageUser;
 use App\Repositories\MessageRepository;
 use App\Repositories\MessageUserRepository;
 use App\Repositories\FileRepository;
 use App\Repositories\PairRepository;
+use App\Repositories\Repository;
 use Illuminate\Support\Facades\DB;
 
-class MessageService implements MessageServiceInterface
+class MessageService extends Repository implements MessageServiceInterface
 {
     protected $pairRepository;
     protected $messageRepository;
@@ -64,8 +66,12 @@ class MessageService implements MessageServiceInterface
     public function sendMessage(int $userId, int $pairingUserId, array $parameters)
     {
         $messageUser = DB::transaction(function () use($userId, $pairingUserId, $parameters) {
+
             // メッセージを先に登録する
-            $message = $this->messageRepository->create($parameters);
+            $message = $this->messageRepository->create([
+                Message::MESSAGE => MessageFacade::encryptMessage($parameters['message']),
+                Message::TYPE => Message::TYPE_TEXT,
+            ]);
 
             // メッセージと利用者の紐付けを行う
             $messageUser = $this->messageUserRepository->create([
@@ -107,7 +113,7 @@ class MessageService implements MessageServiceInterface
 
             // メッセージを先に登録する
             $message = $this->messageRepository->createFile([
-                'message' => Message::encryptMessage('no-message.') // todo:メーセージ付きのファイル送付機能
+                'message' => MessageFacade::encryptMessage('no-message.') // todo:メーセージ付きのファイル送付機能
             ], $file->id);
 
             // メッセージと利用者の紐付けを行う

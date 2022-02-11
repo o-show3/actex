@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Models\CategoryUser;
 use Illuminate\Support\Facades\DB;
 
-class CategoryUserRepository
+class CategoryUserRepository extends Repository
 {
 
     protected $model;
@@ -16,17 +16,6 @@ class CategoryUserRepository
     public function __construct()
     {
         $this->model = CategoryUser::class;
-    }
-
-    public function create(array $parameters)
-    {
-        $categoryUser = new ($this->model);
-        $categoryUser->create([
-            CategoryUser::USER_ID     => $parameters[CategoryUser::USER_ID],
-            CategoryUser::CATEGORY_ID => $parameters[CategoryUser::CATEGORY_ID],
-        ]);
-
-        return $categoryUser;
     }
 
     public function delete(int $userId, string $categoryId)
