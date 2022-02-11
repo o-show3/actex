@@ -50,4 +50,21 @@ class Repository
         return
             $entity;
     }
+
+    /**
+     * 条件を満たすデータを集計します
+     *
+     * @param array $parameters
+     * @throws \Exception
+     */
+    public function count(array $parameters)
+    {
+        if($this->model == null)
+            throw new \Exception('データ削除エラー');
+
+        // エンティティを取得する
+        return
+            $this->model::where($parameters)->count();
+
+    }
 }

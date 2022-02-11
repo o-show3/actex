@@ -56,10 +56,14 @@ class CategoryService implements CategoryServiceInterface
             $category = $this->categoryRepository->getByUuid($categoryUuid);
             if(is_null($category))
                 return null;
-            // 既に存在しているか
-            $isExist = $this->categoryUserRepository->isExist($userId, $category->id);
-            if($isExist === true)
-                return null;// 存在している場合
+            // 条件を満たすレコードをカウントする
+            $count = $this->categoryUserRepository->count([
+                CategoryUser::USER_ID => $userId,
+                CategoryUser::CATEGORY_ID => 6,
+            ]);
+            // 1つ以上レコードが存在する場合
+            if($count > 0)
+                return null;
 
             // カテゴリをユーザに紐付ける
             return
