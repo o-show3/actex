@@ -20,13 +20,4 @@ class CategoryRepository extends Repository
         $this->model = Category::class;
     }
 
-    /**
-     * 全てのカテゴリを取得します
-     *
-     * @return Category[]|\Illuminate\Database\Eloquent\Collection
-     */
-    public function getAllCategory()
-    {
-        return Category::all();
-    }
 }

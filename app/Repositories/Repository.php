@@ -84,4 +84,14 @@ class Repository
         return
             $this->model::whereIn($key, $primaryKeys)->get();
     }
+
+    /**
+     * 全てのデータを取得します
+     *
+     * @return mixed
+     */
+    public function getAll()
+    {
+        return $this->model::all();
+    }
 }

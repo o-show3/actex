@@ -131,7 +131,7 @@ class PairingService implements PairingServiceInterface
         $categories = new Collection();
 
         // カテゴリをすベて取得します
-        $categories = $this->categoryRepository->getAllCategory();
+        $categories = $this->categoryRepository->getAll();
 
         return $categories;
 
