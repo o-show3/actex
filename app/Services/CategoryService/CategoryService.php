@@ -89,7 +89,10 @@ class CategoryService implements CategoryServiceInterface
 
             // カテゴリの紐付けを削除します
             return
-                $this->categoryUserRepository->delete($userId, $category->id);
+                $this->categoryUserRepository->delete([
+                    [CategoryUser::USER_ID, "=", $userId],
+                    [CategoryUser::CATEGORY_ID, "=", $category->id]
+                ]);
         });
 
         return $categoryUser;

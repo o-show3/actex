@@ -18,15 +18,6 @@ class CategoryUserRepository extends Repository
         $this->model = CategoryUser::class;
     }
 
-    public function delete(int $userId, string $categoryId)
-    {
-        $categoryUser = CategoryUser::where([
-            [CategoryUser::USER_ID, "=", $userId],
-            [CategoryUser::CATEGORY_ID, "=", $categoryId]
-        ])->forceDelete();
-        return $categoryUser;
-    }
-
     /**
      * ユーザIDとカテゴリIDから、既にデータが存在しているかどうかを返します
      *

@@ -28,4 +28,26 @@ class Repository
             $this->model::create($parameters);
     }
 
+    /**
+     * 条件を満たすデータを削除します
+     *
+     * @param array $parameters
+     * @param bool $forceDelete
+     * @throws \Exception
+     */
+    public function delete(array $parameters, bool $forceDelete=false)
+    {
+        if($this->model == null)
+            throw new \Exception('データ削除エラー');
+
+        // エンティティを取得する
+        $entity = $this->model::where($parameters);
+
+            ($forceDelete)
+                ? $entity->forceDelete() // 強制削除
+                : $entity->delete();     // 削除
+
+        return
+            $entity;
+    }
 }
