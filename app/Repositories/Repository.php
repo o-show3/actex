@@ -12,6 +12,10 @@ class Repository
      */
     protected $model = null;
 
+    const WHERE_KEY         = 'where_key';
+    const WHERE_SEPARATOR   = 'where_separator';
+    const WHERE_VALUE       = 'where_value';
+
     /**
      * データを新規作成する
      *
@@ -66,6 +70,28 @@ class Repository
         return
             $this->model::where($parameters)->count();
 
+    }
+
+    /**
+     * 条件を満たすデータを取得します
+     *
+     * @param array $whereParameters
+     * @throws \Exception
+     */
+    public function where(array $whereParameters)
+    {
+        if($this->model == null)
+            throw new \Exception('データ取得エラー');
+
+        $entity = $this->model::query();
+        foreach ($whereParameters as $parameter)
+        {
+            $entity->where($parameter[self::WHERE_KEY], $parameter[self::WHERE_SEPARATOR], $parameter[self::WHERE_VALUE]);
+        }
+
+        // エンティティを取得する
+        return
+            $entity->get();
     }
 
     /**
