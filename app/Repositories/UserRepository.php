@@ -34,24 +34,4 @@ class UserRepository extends Repository
             $this->model::whereNotIn($this->model::ID, $excludesIdList)
                 ->get();
     }
-//
-//    /**
-//     * ユーザIDからユーザを取得する
-//     *
-//     * @param array $userIdList
-//     * @return Collection
-//     */
-//    public function getUsers(array $userIdList)
-//    {
-//        if($this->model == null)
-//            return new Collection();
-//
-//        $users = $this->model::whereIn(User::ID, $userIdList)
-//            ->get();
-//
-//        if(count($users)==0)
-//            return new Collection();
-//
-//        return $users;
-//    }
 }
