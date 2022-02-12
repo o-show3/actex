@@ -20,20 +20,6 @@ class CategoryUser extends Model
     public const UPDATED_AT = 'updated_at';
     public const DELETED_AT = 'deleted_at';
 
-    /**
-     * ユーザIDとカテゴリIDを満たすデータの個数を数える
-     *
-     * @param string $userId
-     * @param string $category_id
-     * @return mixed
-     */
-    public function countOfUsersCategory(string $userId, string $category_id)
-    {
-        return CategoryUser::where([
-            self::USER_ID => $userId,
-            self::CATEGORY_ID => $category_id
-        ])->count();
-    }
 
     /**
      * リレーション：Category

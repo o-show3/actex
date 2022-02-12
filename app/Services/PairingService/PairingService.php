@@ -4,6 +4,7 @@ namespace App\Services\PairingService;
 
 use App\Models\CategoryUser;
 use App\Models\Pair;
+use App\Models\User;
 use App\Services\PairingService\PairingServiceInterface;
 use App\Repositories\UserRepository;
 use App\Repositories\PairRepository;
@@ -51,6 +52,7 @@ class PairingService implements PairingServiceInterface
      *
      * @param $user_id
      * @return mixed
+     * @throws \Exception
      */
     public function getPair($user_id)
     {
@@ -66,7 +68,7 @@ class PairingService implements PairingServiceInterface
         );
 
         return
-            $this->userRepository->getUsers($pairingUserIds);
+            $this->userRepository->whereInKeys(User::ID, $pairingUserIds);
     }
 
     /**
@@ -74,6 +76,7 @@ class PairingService implements PairingServiceInterface
      *
      * @param $user_id
      * @return mixed
+     * @throws \Exception
      */
     public function getCandidates($user_id)
     {
@@ -109,8 +112,7 @@ class PairingService implements PairingServiceInterface
             return $count;
         });
         // ユーザ情報を取得する
-        $sameCategoryUsers = $this->userRepository->getUsers($sameCategoryGroupSorted->keys()->all());
-
+        $sameCategoryUsers = $this->userRepository->whereInKeys(User::ID, $sameCategoryGroupSorted->keys()->all());
         // パートナー候補のリストを作成する
         $candidates = new PartnerCollection();
         $sameCategoryGroupSorted->each(function ($count, $userId) use ($candidates, $sameCategoryUsers) {
@@ -131,7 +133,7 @@ class PairingService implements PairingServiceInterface
         $categories = new Collection();
 
         // カテゴリをすベて取得します
-        $categories = $this->categoryRepository->getAllCategory();
+        $categories = $this->categoryRepository->getAll();
 
         return $categories;
 

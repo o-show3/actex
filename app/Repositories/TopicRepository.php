@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Models\Topic;
 use App\Repositories\traits\GetByUuidGettable;
 
-class TopicRepository
+class TopicRepository extends Repository
 {
     use GetByUuidGettable;
 

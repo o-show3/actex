@@ -48,7 +48,11 @@
                                         @if($messageUser->message->type == \App\Models\Message::TYPE_TEXT)
                                             <span>{{App\Facades\Message::decryptMessage($messageUser->message->message)}}</span>
                                         @elseif($messageUser->message->type == \App\Models\Message::TYPE_IMAGE)
+                                            @if($messageUser->message->file != null)
                                             <img style="max-height: 300px; max-width: 600px;" src="{{\Illuminate\Support\Facades\Storage::url($messageUser->message->file->path)}}">
+                                            @else
+                                            <span style="color: red">エラー：送信されたファイルが参照できませんでした。</span>
+                                            @endif
                                         @endif
                                     </div>
                                 </div>
@@ -65,7 +69,11 @@
                                         @if($messageUser->message->type == \App\Models\Message::TYPE_TEXT)
                                             <span>{{App\Facades\Message::decryptMessage($messageUser->message->message)}}</span>
                                         @elseif($messageUser->message->type == \App\Models\Message::TYPE_IMAGE)
+                                            @if($messageUser->message->file != null)
                                             <img style="max-height: 300px; max-width: 600px;" src="{{\Illuminate\Support\Facades\Storage::url($messageUser->message->file->path)}}">
+                                            @else
+                                            <span style="color: red">エラー：送信されたファイルが参照できませんでした。</span>
+                                            @endif
                                         @endif
                                     </div>
                                 </div>

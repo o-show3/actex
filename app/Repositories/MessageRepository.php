@@ -7,7 +7,7 @@ use App\Facades\Message as MessageFacade;
 use App\Repositories\traits\GetByIdGettable;
 use Illuminate\Support\Facades\Crypt;
 
-class MessageRepository
+class MessageRepository extends Repository
 {
     use GetByIdGettable;
 
@@ -22,51 +22,21 @@ class MessageRepository
     }
 
     /**
-     * メッセージを作る
-     *
-     * @param array $parameters
-     * @return mixed
-     */
-    public function create(array $parameters)
-    {
-        $message = new ($this->model);
-        $message->message = MessageFacade::encryptMessage($parameters['message']);
-        $message->type    = Message::TYPE_TEXT;
-        $message->save();
-
-        return $message;
-    }
-
-    /**
      * ファイルメッセージを作る
      *
-     * @param array $parameters
+     * @param string $message
      * @param int|null $fileId
      * @return mixed
+     * @throws \Exception
      */
-    public function createFile(array $parameters, int $fileId = null)
+    public function createFile(string $message, int $fileId = null)
     {
-        $message = new ($this->model);
-        $message->message = $parameters['message'];
-        $message->type    = Message::TYPE_IMAGE;
-        $message->file_id = $fileId;
-        $message->save();
+        $entity = parent::create([
+            Message::MESSAGE => $message,
+            Message::TYPE    => Message::TYPE_IMAGE,
+            Message::FILE_ID => $fileId,
+        ]);
 
-        return $message;
-    }
-
-    /**
-     * 既読カウンターに値を加算して更新します
-     *
-     * @param array $messageList
-     * @param int $increment
-     * @return mixed
-     */
-    public function addReadIcon(array $messageList, int $increment)
-    {
-        return
-            Message::whereIn(Message::ID, $messageList)
-                ->where(Message::READ_ICON, "=", 0)
-                ->increment(Message::READ_ICON, $increment);
+        return $entity;
     }
 }

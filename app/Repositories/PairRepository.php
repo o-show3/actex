@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Models\Pair;
 use App\Repositories\traits\GetByUserIdGettable;
 
-class PairRepository
+class PairRepository extends Repository
 {
     use GetByUserIdGettable;
 
@@ -42,11 +42,13 @@ class PairRepository
      *
      * @param $user_id
      * @return mixed
+     * @throws \Exception
      */
     public function getPaired($user_id)
     {
         return
-            $this->model::where(Pair::USER_ID_PAIRING, '=', $user_id)
-                ->get();
+            $this->where([
+                [parent::WHERE_KEY => Pair::USER_ID_PAIRING , parent::WHERE_SEPARATOR => '=', parent::WHERE_VALUE => $user_id],
+            ]);
     }
 }

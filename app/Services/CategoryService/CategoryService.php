@@ -2,11 +2,14 @@
 
 namespace App\Services\CategoryService;
 
+use App\Models\Category;
 use App\Services\CategoryService\CategoryServiceInterface;
 use App\Repositories\CategoryRepository;
 use App\Repositories\CategoryUserRepository;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use App\Models\CategoryUser;
+use Illuminate\Support\Str;
 
 class CategoryService implements CategoryServiceInterface
 {
@@ -32,7 +35,11 @@ class CategoryService implements CategoryServiceInterface
     public function createCategory(string $name, string $description)
     {
         return
-            $this->categoryRepository->create($name, $description);
+            $this->categoryRepository->create([
+                Category::UUID => Str::uuid(),
+                Category::NAME => $name,
+                Category::DESCRIPTION => $description,
+            ]);
     }
 
     /**
@@ -49,14 +56,21 @@ class CategoryService implements CategoryServiceInterface
             $category = $this->categoryRepository->getByUuid($categoryUuid);
             if(is_null($category))
                 return null;
-            // 既に存在しているか
-            $isExist = $this->categoryUserRepository->isExist($userId, $category->id);
-            if($isExist === true)
-                return null;// 存在している場合
+            // 条件を満たすレコードをカウントする
+            $count = $this->categoryUserRepository->count([
+                CategoryUser::USER_ID => $userId,
+                CategoryUser::CATEGORY_ID => 6,
+            ]);
+            // 1つ以上レコードが存在する場合
+            if($count > 0)
+                return null;
 
-            // カテゴリをユーザに紐づける
+            // カテゴリをユーザに紐付ける
             return
-                $this->categoryUserRepository->add($userId, $category->id);
+                $this->categoryUserRepository->create([
+                    CategoryUser::USER_ID     => $userId,
+                    CategoryUser::CATEGORY_ID => $category->id,
+                ]);
         });
 
         return $categoryUser;
@@ -79,7 +93,10 @@ class CategoryService implements CategoryServiceInterface
 
             // カテゴリの紐付けを削除します
             return
-                $this->categoryUserRepository->delete($userId, $category->id);
+                $this->categoryUserRepository->delete([
+                    [CategoryUser::USER_ID, "=", $userId],
+                    [CategoryUser::CATEGORY_ID, "=", $category->id]
+                ]);
         });
 
         return $categoryUser;
@@ -93,8 +110,8 @@ class CategoryService implements CategoryServiceInterface
     public function getTrendCategory()
     {
         $trendCategory = $this->categoryUserRepository->getTrendCategory();
-        $trendCategoryId = $trendCategory->pluck('category_id');
-        $trendCategoryData = $this->categoryRepository->getCategoriesById($trendCategoryId);
+        $trendCategoryId = $trendCategory->pluck(CategoryUser::CATEGORY_ID);
+        $trendCategoryData = $this->categoryRepository->whereInKeys(Category::ID, $trendCategoryId->toArray());
 
         $trendCategoryCollection = new Collection();
         foreach ($trendCategory as $item){

@@ -130,7 +130,11 @@ class TopicService
     public function addTopicUser(string $userId, string $topicId, int $status)
     {
         return
-            $this->topicUserRepository->create($userId, $topicId, $status);
+            $this->topicUserRepository->create([
+                    TopicUser::USER_ID => $userId,
+                    TopicUser::TOPIC_ID => $topicId,
+                    TopicUser::STATUS => $status,
+            ]);
     }
 
     /**

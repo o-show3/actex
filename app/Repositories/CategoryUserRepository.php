@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Models\CategoryUser;
 use Illuminate\Support\Facades\DB;
 
-class CategoryUserRepository
+class CategoryUserRepository extends Repository
 {
 
     protected $model;
@@ -17,45 +17,6 @@ class CategoryUserRepository
     {
         $this->model = CategoryUser::class;
     }
-
-    public function add(int $userId, string $categoryId)
-    {
-        $categoryUser = new ($this->model);
-        $categoryUser->create([
-            CategoryUser::USER_ID     => $userId,
-            CategoryUser::CATEGORY_ID => $categoryId,
-        ]);
-
-        return $categoryUser;
-    }
-
-    public function delete(int $userId, string $categoryId)
-    {
-        $categoryUser = CategoryUser::where([
-            [CategoryUser::USER_ID, "=", $userId],
-            [CategoryUser::CATEGORY_ID, "=", $categoryId]
-        ])->forceDelete();
-        return $categoryUser;
-    }
-
-    /**
-     * ユーザIDとカテゴリIDから、既にデータが存在しているかどうかを返します
-     *
-     * @param int $userId
-     * @param string $categoryId
-     * @return bool
-     */
-    public function isExist(int $userId, string $categoryId)
-    {
-        $categoryUser = new ($this->model);
-        $count = $categoryUser->countOfUsersCategory($userId, $categoryId);
-
-        if($count > 0)
-            return true;
-
-        return false;
-    }
-
 
     /**
      * ユーザが登録ずみのカテゴリを取得します
@@ -78,7 +39,7 @@ class CategoryUserRepository
     public function getTrendCategory()
     {
         return CategoryUser::select(DB::raw('category_id, COUNT(category_id) AS category_id_count'))
-            ->groupBy(CategoryUser::CATEGORY_ID)
+            ->groupBy('category_id')
             ->orderBy('category_id_count', 'desc')
             ->get();
     }
